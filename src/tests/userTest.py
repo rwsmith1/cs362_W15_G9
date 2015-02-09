@@ -1,9 +1,14 @@
 __author__ = 'kkozee'
 
 from src.models.user import User
+from src.models.filter import Filter
 
-user = User()
+user = User(0, "Kevin", "kkozee@gmail.com", "pass")
 
-user.setName("Kevin")
+f = Filter(user)
 
-print user.getName()
+f.createMessage()
+f.setParts()
+f.attachParts()
+
+f.sendMessage()

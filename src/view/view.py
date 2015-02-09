@@ -3,7 +3,6 @@ __author__ = 'holly'
 import sys
 import curses
 from curses import wrapper
-#import MySQLdb
 from src.models.user import User
 from src.database.database import Database
 

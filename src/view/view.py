@@ -21,7 +21,7 @@ class View(User):
     def validateUser(self):
         db = Database()
         db.connect()
-        sql = "SELECT * FROM User WHERE name = '%s" % (self.currentUsername)
+        sql = "SELECT * FROM User WHERE name = '%s'" % (self.currentUsername)
         results = db.query(sql)
 
         self.password = results[2]

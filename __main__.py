@@ -1,12 +1,25 @@
 __author__ = 'kkozee'
 
-from src.users import Users
-from src.filter import Filter
+from src.models.user import User
+from src.models.filter import Filter
+from src.view.view import View
+import getpass
+
+import sys
 
 if __name__ == '__main__':
-    user = Users(1, "Kevin", "kkozee@gmail.com", "password")
 
-    file = Filter(user)
+    args = len(sys.argv)
+    if args < 3:
+        currentUsername = raw_input("Username: ")
+        currentPassword = getpass.getpass()
+    else:  # get username and password from command line
+        currentUsername = sys.argv[1]
+        currentPassword = sys.argv[2]
+
+    view = View(currentUsername, currentPassword)
+    view.initWrapper()
+
 
 
 

@@ -1,21 +1,24 @@
 __author__ = 'kkozee'
 
+from src.models.base import Base
 
-class Appointments(object):
+class Appointment(Base):
 
-    id = 0
+    canceled = 0
     user = ""
     student = ""
     time = ""
     date = ""
     location = ""
 
-    def setID(self, id):
+    def __init__(self, id, user, student, time, date, location):
         self.id = id
-        return self.id
-
-    def getID(self):
-        return self.id
+        self.canceled = 0
+        self.user = user
+        self.student = student
+        self.time = time
+        self.date = date
+        self.location = location
 
     def setUser(self, user):
         self.user = user
@@ -51,3 +54,14 @@ class Appointments(object):
 
     def getLocation(self):
         return self.location
+
+    def setCanceled(self, canceled):
+        self.canceled = canceled
+        return self.canceled
+
+    def getCanceled(self):
+        return self.canceled
+
+    def cancelAppointment(self):
+        self.canceled = 1
+        return self.canceled

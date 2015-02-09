@@ -1,8 +1,9 @@
 __author__ = 'kkozee'
 
-class Users(object):
+from src.models.base import Base
 
-    id = 0
+class User(Base):
+
     name = ""
     email = ""
     password = ""
@@ -12,13 +13,6 @@ class Users(object):
         self.name = name
         self.email = email
         self.password = password
-
-    def setID(self, id):
-        self.id = id
-        return self.id
-
-    def getID(self):
-        return self.id
 
     def setName(self, name):
         self.name = name

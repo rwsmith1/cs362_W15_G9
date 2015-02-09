@@ -1,14 +1,15 @@
-__author__ = 'roger'
+__author__ = 'rwsmith1'
 
 import smtplib
+
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
-from users import Users
+from src.models.base import Base
 
-class Filter():
+
+class Filter(Base):
 
     # Script only works when run on OSU servers.
-
 
     user = ""
     sendAddr = "" # sendAddr == my email address
@@ -16,12 +17,14 @@ class Filter():
     msg = ""
     pt1 = ""
     pt2 = ""
+    mimeText = ""
+    calendarRequest = "" # Variable to hold the calendar request
 
     def __init__(self, oUser):
         self.user = oUser
         self.msg = MIMEMultipart('alternative')
-        self.pt1 = MIMEText(MIMEText, 'plain')
-        self.pt2 = MIMEText(calendarRequest, 'calendar')
+        self.pt1 = MIMEText(self.mimeText, 'plain')
+        self.pt2 = MIMEText(self.calendarRequest, 'calendar')
         self.sendAddr = "donotreply@oregonstate.edu"
         self.destAddr = self.user.getEmail()
 
@@ -31,9 +34,6 @@ class Filter():
         self.msg['Subject'] = "New Advising Session"
         self.msg['From'] = self.sendAddr
         self.msg['To'] = self.destAddr
-
-    mimeText = ""
-    calendarRequest = ""  # Variable to hold the calendar request
 
     def setParts(self):
         self.pt2.add_header('Content-Disposition', 'attachment', method='REQUEST')

@@ -1,8 +1,8 @@
 __author__ = 'kkozee'
 
-from src.users import Users
+from src.models.user import User
 
-user = Users()
+user = User()
 
 user.setName("Kevin")
 

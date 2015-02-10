@@ -18,8 +18,11 @@ if __name__ == '__main__':
         currentPassword = sys.argv[2]
 
     view = View(currentUsername, currentPassword)
-    view.initWrapper()
-
+   
+    if (view.validateUser()):
+        view.initWrapper()
+    else:
+        print "Login failed"
 
 
 

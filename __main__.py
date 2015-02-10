@@ -2,6 +2,7 @@ __author__ = 'kkozee'
 
 from src.models.user import User
 from src.models.filter import Filter
+from src.models.messages import Messages
 from src.view.view import View
 import getpass
 
@@ -18,7 +19,14 @@ if __name__ == '__main__':
         currentPassword = sys.argv[2]
 
     view = View(currentUsername, currentPassword)
+
+    view.validateUser()
+
     view.initWrapper()
+
+    m = Messages()
+
+    m.buildMessageFromEmail('email.txt')
 
 
 

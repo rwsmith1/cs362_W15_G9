@@ -6,5 +6,5 @@ class Student(User):
 
     def __init__(self, id, name, email):
         self.id = id
-        self.name = name
+        self.studentName = name
         self.email = email

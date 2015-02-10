@@ -30,4 +30,4 @@ class Database(object):
             if self.results is not None:
                 return self.results
         except:
-            print "Error: Could not connect to database."
+            print "Error: Could not execute query."

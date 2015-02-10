@@ -4,13 +4,6 @@ from src.models.base import Base
 
 class Appointment(Base):
 
-    canceled = 0
-    user = ""
-    student = ""
-    time = ""
-    date = ""
-    location = ""
-
     def __init__(self, id, user, student, time, date, location):
         self.id = id
         self.canceled = 0

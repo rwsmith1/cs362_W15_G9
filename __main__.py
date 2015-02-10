@@ -29,6 +29,10 @@ if __name__ == '__main__':
     m.buildMessageFromEmail('email.txt')
 
 
+    view.validateUser()
+
+    view.initWrapper()
+
 
 
 

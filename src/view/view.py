@@ -25,7 +25,7 @@ class View(User):
             self.email = results[3]
         elif results is None:
             sys.exit("Invalid Username")
-        elif self.password != self.currentPassword:
+        if self.password != self.currentPassword:
             sys.exit("Invalid Password")
 
     def initView(self):

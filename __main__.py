@@ -19,10 +19,9 @@ if __name__ == '__main__':
 
     view = View(currentUsername, currentPassword)
    
-    if (view.validateUser()):
-        view.initWrapper()
-    else:
-        print "Login failed"
+    view.validateUser()
+
+    view.initWrapper()
 
 
 

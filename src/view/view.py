@@ -20,12 +20,12 @@ class View(User):
         sql = "SELECT * FROM User WHERE name = '%s'" % (self.currentUsername)
         results = db.query(sql)
 
-        self.password = results[2]
-        self.email = results[3]
-
-        if results is None:
+        if results is not None:
+            self.password = results[2]
+            self.email = results[3]
+        elif results is None:
             sys.exit("Invalid Username")
-        if self.password != self.currentPassword:
+        elif self.password != self.currentPassword:
             sys.exit("Invalid Password")
 
     def initView(self):

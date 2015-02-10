@@ -8,14 +8,11 @@ from src.database.database import Database
 
 class View(User):
 
-    stdscr = ""
-    currentUsername = ""
-    currentPassword = ""
-    n = 0
-
     def __init__(self, currentUsername, currentPassword):
         self.currentUsername = currentUsername
         self.currentPassword = currentPassword
+        self.stdscr = None
+        self.n = 0
 
     def validateUser(self):
         db = Database()
@@ -26,7 +23,7 @@ class View(User):
         self.password = results[2]
         self.email = results[3]
 
-        if self.results is None:
+        if results is None:
             sys.exit("Invalid Username")
         if self.password != self.currentPassword:
             sys.exit("Invalid Password")

@@ -1,16 +1,14 @@
 __author__ = 'kkozee'
 
-#import MySQLdb
+import MySQLdb
 
 class Database(object):
 
-    db = ""
-    results = ""
-    sql = ""
-    results = ""
-
-
     def __init__(self):
+        self.db = None
+        self.results = None
+        self.sql = None
+        self.results = None
         self.cursor = self.db.cursor()
 
     def connect(self):

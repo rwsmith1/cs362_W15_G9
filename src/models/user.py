@@ -4,10 +4,6 @@ from src.models.base import Base
 
 class User(Base):
 
-    name = ""
-    email = ""
-    password = ""
-
     def __init__(self, id, name, email, password):
         self.id = id
         self.name = name

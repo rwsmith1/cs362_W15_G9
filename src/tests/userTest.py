@@ -1,5 +1,9 @@
 __author__ = 'kkozee'
 
+import sys
+
+sys.path.append('')
+
 from src.models.user import User
 from src.models.filter import Filter
 

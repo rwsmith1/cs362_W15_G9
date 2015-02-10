@@ -11,16 +11,9 @@ class Filter(Base):
 
     # Script only works when run on OSU servers.
 
-    user = ""
-    sendAddr = "" # sendAddr == my email address
-    destAddr = "" # destAddr == recipient's email address
-    msg = ""
-    pt1 = ""
-    pt2 = ""
-    mimeText = ""
-    calendarRequest = "" # Variable to hold the calendar request
-
     def __init__(self, oUser):
+        self.mimeText = None
+        self.calendarRequest = None
         self.user = oUser
         self.msg = MIMEMultipart('alternative')
         self.pt1 = MIMEText(self.mimeText, 'plain')

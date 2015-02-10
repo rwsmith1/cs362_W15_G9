@@ -1,12 +1,15 @@
 __author__ = 'kkozee'
 
+import sys
+
+sys.path.append('/Users/kkozee/PycharmProjects/cs362_W15_G9/')
+
 from src.models.user import User
 from src.models.filter import Filter
 from src.models.messages import Messages
+from src.builders.messageBuilder import MessageBuilder
 from src.view.view import View
 import getpass
-
-import sys
 
 if __name__ == '__main__':
 
@@ -24,14 +27,10 @@ if __name__ == '__main__':
 
     view.initWrapper()
 
-    m = Messages()
+    m = MessageBuilder()
 
     m.buildMessageFromEmail('email.txt')
 
-
-    view.validateUser()
-
-    view.initWrapper()
 
 
 

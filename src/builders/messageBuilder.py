@@ -1,5 +1,9 @@
 __author__ = 'kkozee'
 
+import sys
+
+sys.path.append('/Users/kkozee/PycharmProjects/cs362_W15_G9/')
+
 import email
 from email.mime.text import MIMEText
 from src.models.messages import Messages
@@ -24,3 +28,5 @@ class MessageBuilder(Messages):
         self.bodyParts = self.body.split('\n')
 
         self.subjectParts = self.inMsg['subject'].split(' ')
+
+        return self

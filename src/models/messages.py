@@ -1,11 +1,12 @@
 __author__ = 'kkozee'
 
 import sys
-import email
+
+sys.path.append('/Users/kkozee/PycharmProjects/cs362_W15_G9/')
+
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from src.models.base import Base
-from src.builders.messageBuilder import MessageBuilder
 
 class Messages(Base):
 
@@ -23,9 +24,3 @@ class Messages(Base):
         self.msg = MIMEMultipart('alternative')
         self.pt1 = MIMEText(self.mimeText, 'plain')
         self.pt2 = MIMEText(self.calendarRequest, 'calendar')
-
-    def buildMessageFromEmail(self, mail):
-        message = MessageBuilder()
-        message.buildMessageFromEmail(mail)
-
-        return message

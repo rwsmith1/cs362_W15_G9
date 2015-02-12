@@ -11,7 +11,8 @@ INSERT INTO Student (name, email) VALUES
 INSERT INTO Message (fkUser,fkStudent,mailbox) VALUES 
   ((SELECT pkUser FROM User WHERE name = 'user1' ),(SELECT pkStudent FROM Student WHERE name = 'student2'),'One ring to rule them all'),
   ((SELECT pkUser FROM User WHERE name = 'user2' ),(SELECT pkStudent FROM Student WHERE name = 'student2'),'One ring to find them'),
-  ((SELECT pkUser FROM User WHERE name = 'user3' ),(SELECT pkStudent FROM Student WHERE name = 'student1'),'One Ring to bring them all and in the darkness bind them');
+  ((SELECT pkUser FROM User WHERE name = 'user3' ),(SELECT pkStudent FROM Student WHERE name = 'student1'),'One Ring to bring them all and in the darkness bind them')
+  ((SELECT pkUser FROM User WHERE name = 'user1' ),(SELECT pkStudent FROM Student WHERE name = 'student2'),'Val');
 
 INSERT INTO Appointment (fkUser, fkStudent, time, date, location, canceled) VALUES 
   ((SELECT pkUser FROM User WHERE name = 'user1' ),(SELECT pkStudent FROM Student WHERE name = 'student2'), 132, 2012/12/12, 'online', 0),

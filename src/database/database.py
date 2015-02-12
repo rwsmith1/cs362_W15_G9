@@ -8,7 +8,6 @@ class Database(object):
         self.db = None
         self.results = None
         self.sql = None
-        self.results = None
         self.cursor = None
 
     def connect(self):
@@ -17,7 +16,6 @@ class Database(object):
             self.cursor = self.db.cursor()	
 	except:
             print "Error: Could not connect to database."
-
 
     def close(self):
         # close database connection:
@@ -32,3 +30,14 @@ class Database(object):
                 return self.results
         except:
             print "Error: Could not connect to database."
+
+    def queryall(self, sql):
+        # query the database
+        try:
+            self.cursor.execute(sql)
+            self.results = self.cursor.fetchall()
+            if self.results is not None:
+                return self.results
+        except:
+            print "Error: Could not connect to database."
+

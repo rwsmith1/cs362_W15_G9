@@ -1,0 +1,6 @@
+# Basic .procmailrc file.
+
+:0
+* ^From.*do.not.reply@engr.orst.edu
+* ^Subject.*Advising Signup
+| /usr/bin/python filter.py

@@ -10,7 +10,7 @@ class databaseEvent(Database):
         
     # Insert new Message row to table
     def createMessage(self, userName, studentName, Message):
-        #self = Database()
+        #self.Database()
         #self.connect()
         self.sql = "INSERT INTO Message (fkUser,fkStudent,mailbox) VALUES ((SELECT pkUser FROM User WHERE name = '%s'),(SELECT pkStudent FROM Student WHERE name = '%s'),%s)" % (userName, studentName, Message)
         return self.sql
@@ -20,16 +20,16 @@ class databaseEvent(Database):
 
     # Insert new Appointment row to table
     def addApp(self, userName, studentName, time, date, location, canceled):
-        #self = Database()
+        #self.Database()
         #self.connect()
-        self.sql = "INSERT INTO Appointment (fkUser,fkStudent, time, data, location, canceled) VALUES ((SELECT pkUser FROM User WHERE name = '%s'),(SELECT pkStudent FROM Student WHERE name = '%s'),%s,%s,%s,%d)" % (userName, studentName, time, date, location, canceled)
+        self.sql = "INSERT INTO Appointment (fkUser,fkStudent, time, data, location, canceled) VALUES ((SELECT pkUser FROM User WHERE name = '%s'),(SELECT pkStudent FROM Student WHERE name = '%s'),'%s','%s','%s','%d')" % (userName, studentName, time, date, location, canceled)
         return self.sql
         # self.q =self.query(self.sql)
         # return self.q 
 
     #get Appointment info 
     def getApp(self, id):
-       self = Database()
+#       self.Database()
         #self.connect()
         self.sql = "SELECT pkAppointment, fkUser, User.name, fkStudent, Student.name, Student.email, time, location, date, canceled FROM User INNER JOIN Appointment ON User.pkUser = Appointment.fkUser INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent WHERE User.pkUser = '%s' ORDER BY Appointment.date" % (id)
         return self.sql
@@ -38,7 +38,7 @@ class databaseEvent(Database):
 
     # Update Appintment table.
     def handleApp(self, appiontmentId, canceled=1):
-       self = Database()
+        self.Database()
         #self.connect()
         self.sql = "UPDATE Appointment SET canceled = %d WHERE pkAppointment = '%d'" % (canceled, appiontmentId)
         return self.sql
@@ -47,6 +47,8 @@ class databaseEvent(Database):
 
     # Get info from a student or user
     def getInfo(self, id,table=0):
+#        self.Database()
+        #self.connect()
         if table == 1:
             info = 'User'
         else:
@@ -55,3 +57,11 @@ class databaseEvent(Database):
         return self.sql
         # self.q =self.query(self.sql)
         # return self.q 
+
+    def getAppID(self, name, time, date, user)
+    #        self.Database()
+    #self.connect()
+        self.sql = "SELECT pkAppointment FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.time = %d AND Appointment.date = '%s' AND User.name = '%s'" % (info, name, time, date, user)
+        # self.q =self.query(self.sql)
+        # return self.q
+        return self.sql

@@ -3,7 +3,8 @@
 __author__ = 'kkozee'
 
 import sys
-
-sys.path.append('/Users/kkozee/PycharmProjects/cs362_W15_G9')
+import os
+#print sys.path
+#sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 execfile("__main__.py")

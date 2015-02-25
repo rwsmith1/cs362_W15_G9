@@ -32,3 +32,21 @@ class Database(object):
                 return self.results
         except:
             print "Error: Could not execute query."
+
+    def queryall(self, sql):
+        # query the database
+        try:
+            self.cursor.execute(sql)
+            self.results = self.cursor.fetchall()
+            if self.results is not None:
+                return self.results
+        except:
+            print "Error: Could not connect to database."
+
+    def update(self, sql):
+        # update the database
+        try:
+            self.cursor.execute(sql)
+            self.db.commit()
+        except:
+            print "Error: Could not connect to database."

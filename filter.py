@@ -1,42 +1,54 @@
-#!/usr/bin/env python
+__author__ = 'rwsmi_000'
 
-# Script only works when run on OSU servers.
-
-import smtplib
+import datetime
 import email
+import fileinput
+import re
+import smtplib
+import socket
+import string
 import sys
+import time
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 
-# This should allow messages to be piped through by the procmail filter,
-# but I'm not sure how to test it. It works when mail data is entered
-# manually on the console.
+#fullMsg = sys.stdin.readlines()
 
-fullMsg = sys.stdin.readlines()
+fullMsg = """\
+From: do.not.reply@engr.orst.edu
+Sent: Monday, November 26, 2012 19:15
+To: REDACTED@oregonstate.edu; dmcgrath@eecs.oregonstate.edu
+Subject: Advising Signup with McGrath, D Kevin confirmed for Brabham, Matthew Lawrence
+Advising Signup with McGrath, D Kevin confirmed
+Name: REDACTED
+Email: REDACTED@oregonstate.edu
+Date: Wednesday, November 21st, 2012
+Time: 1:00pm - 1:15pm
+Please contact support@engr.oregonstate.edu if you experience problems
+"""
+
+'''
+fullMsg = """ From: do.not.reply@engr.orst.edu
+Sent: Thursday, November 15, 2012 10:11
+To: smithrog@engr.oregonstate.edu
+Subject: Advising Signup Cancellation
+Advising Signup with McGrath, D Kevin CANCELLED
+Name: REDACTED
+Email: REDACTED@engr.orst.edu
+Date: Thursday, November 15th, 2012
+Time: 11:00am - 11:15am
+Please contact support@engr.oregonstate.edu if you experience problems."""
+'''
+
+# REDACTED@engr.orst.edu; dmcgrath@eecs.oregonstate.edu
 
 inMsg = email.message_from_string(''.join(fullMsg))
 
-# destAddr == recipient's email address
 destAddr = inMsg['to']
-sendAddr = inMsg['from']		# Could probably hard code this.
+sendAddr = inMsg['from']
 subject = inMsg['subject']
 advisorName = ""
 apptStatus = ""
-
-# Pulls the body.
-body = inMsg.get_payload()
-bodyParts = body.split('\n')
-
-# This is to split the multiple destination addresses ("REDACTED@.."), if
-# necessary.
-
-# destAddrs = inMsg['to'].split('; ')
-
-# sendAddr == my email address
-# sendAddr = "do.not.reply@oregonstate.edu"
-
-# This parsing is a bit "brute force" for my liking. Anyone have a better
-# ideas how to pull this info?
 
 subjectParts = inMsg['subject'].split(' ')
 
@@ -47,27 +59,66 @@ if subjectParts[0] == "Advising" and subjectParts[1] == "Signup" and subjectPart
         apptStatus = subjectParts[6]
     else:
         apptStatus = subjectParts[5]
-        
+
 if subjectParts[0] == "Advising" and subjectParts[1] == "Signup" and subjectParts[2] == "Cancellation":
     # We should only need both emails, date, and time to cancel an appointment.
     apptStatus = "cancelled"
-        
+
+body = inMsg.get_payload()
+bodyParts = body.split('\n')
+
 studentName = bodyParts[1].split("Name: ")[1]
 date = bodyParts[3].split("Date: ")[1]
-time = bodyParts[4].split("Time: ")[1]
+timeStr = bodyParts[4].split("Time: ")[1]
 
-# Database interaction script call goes here...
+'''
+Create datetime object to pass to DB.
+'''
 
-# Create message container
+dateParts = date.split(',')
+dateString = (dateParts[0] + dateParts[1][0:-2] + dateParts[2]).strip()
+startTimeStr = timeStr.split(" - ")[0]
+endTimeStr = timeStr.split(" - ")[1]
+
+startDateTimeObj = datetime.datetime.strptime(startTimeStr + ' ' + dateString, '%I:%M%p %A %B %d %Y')
+endDateTimeObj = datetime.datetime.strptime(endTimeStr + ' ' + dateString, '%I:%M%p %A %B %d %Y')
+
+
+# Create email.
 msg = MIMEMultipart('alternative')
 msg['Subject'] = subject
 msg['From'] = sendAddr		# Could probably hard code this.
 msg['To'] = destAddr
-# msg['To'] = destAddrs[1]
 
 # Create iCalendar object.
+timecreated = time.strftime('%Y%m%dT%H%M%SZ', time.gmtime())
+uid = timecreated + "@" + socket.gethostname()
+timestart = startDateTimeObj.strftime('%Y%m%dT%H%M%S')
+timeend = endDateTimeObj.strftime('%Y%m%dT%H%M%S')
+
 mimeText = ""
-calendarRequest = ""  # Variable to hold the calendar request
+calendarRequest ="""\
+BEGIN:VCALENDAR
+METHOD:REQUEST
+PRODID:MAST
+VERSION:2.0
+BEGIN:VEVENT
+CREATED:%s
+DTSTAMP:%s
+DTSTART:%s
+DTEND:%s
+LAST-MODIFIED:%s
+SUMMARY:%s
+UID:%s
+DESCRIPTION:%s
+SEQUENCE:0
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR
+""" % (timecreated, timecreated, timestart, timeend, timecreated, inMsg['subject'], uid, body)
+
+# Variable to hold the calendar request
 # (for when we figure out how to do that.)
 
 pt1 = MIMEText(mimeText, 'plain')

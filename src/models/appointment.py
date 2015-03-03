@@ -4,14 +4,13 @@ from src.models.base import Base
 
 class Appointment(Base):
 
-    def __init__(self, id, user, student, time, date, location):
+        def __init__(self, id, user, student):
         self.id = id
         self.canceled = 0
         self.user = user
         self.student = student
-        self.time = time
-        self.date = date
-        self.location = location
+        self.startDateTime = None
+        self.endDateTime = None
 
     def setUser(self, user):
         self.user = user
@@ -27,26 +26,19 @@ class Appointment(Base):
     def getStudent(self):
         return self.student
 
-    def setTime(self, time):
-        self.time = time
-        return self.time
+    def setStartDateTime(self, startDateTime):
+        self.startDateTime = startDateTime
+        return self.startDateTime
+    
+        def getStartDateTime(self):
+        return self.startDateTime
 
-    def getTime(self):
-        return self.time
+    def setEndDateTime(self, endDateTime):
+        self.endDateTime = endDateTime
+        return self.endDateTime
 
-    def setDate(self, date):
-        self.date = date
-        return self.date
-
-    def getDate(self):
-        return self.date
-
-    def setLocation(self, location):
-        self.location = location
-        return self.location
-
-    def getLocation(self):
-        return self.location
+    def getEndDateTime(self):
+        return self.endDateTime
 
     def setCanceled(self, canceled):
         self.canceled = canceled

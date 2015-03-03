@@ -1,5 +1,6 @@
 __author__ = 'rwsmith1'
 
+import datetime
 import smtplib
 from src.models.base import Base
 
@@ -36,3 +37,31 @@ class Filter(Base):
         s = smtplib.SMTP('mail.engr.oregonstate.edu')
         s.sendmail(self.message.sendAddr, self.message.destAddr, self.message.msg.as_string())
         s.quit()
+
+   def createCalObj(self):
+        timecreated = time.strftime('%Y%m%dT%H%M%SZ', time.gmtime())
+        uid = timecreated + "@" + socket.gethostname()
+        timestart = self.appointment.startDateTime.strftime('%Y%m%dT%H%M%S')
+        timeend = self.appointment.endDateTime.strftime('%Y%m%dT%H%M%S')
+
+        mimeText = ""
+        calendarRequest ="""\
+        BEGIN:VCALENDAR
+        METHOD:REQUEST
+        PRODID:MAST
+        VERSION:2.0
+        BEGIN:VEVENT
+        CREATED:%s
+        DTSTAMP:%s
+        DTSTART:%s
+        DTEND:%s
+        LAST-MODIFIED:%s
+        SUMMARY:%s
+        UID:%s
+        DESCRIPTION:%s
+        SEQUENCE:0
+        STATUS:CONFIRMED
+        TRANSP:OPAQUE
+        END:VEVENT
+        END:VCALENDAR
+        """ % (timecreated, timecreated, timestart, timeend, timecreated, inMsg['subject'], uid, body)

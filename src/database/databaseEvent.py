@@ -14,7 +14,7 @@ class databaseEvent(Database):
         #self.connect()
         self.sql = "INSERT INTO Message (fkUser,fkStudent,mailbox) VALUES ((SELECT pkUser FROM User WHERE name = '%s'),(SELECT pkStudent FROM Student WHERE name = '%s'),%s)" % (userName, studentName, Message)
         return self.sql
-        # self.q =self.query(self.sql)
+        # self.q = self.query(self.sql)
         # return self.q       
 
 
@@ -38,7 +38,11 @@ class databaseEvent(Database):
 
     # Update Appintment table.
     def handleApp(self, appiontmentId, canceled=1):
+<<<<<<< Updated upstream
         self = Database()
+=======
+#        self.Database()
+>>>>>>> Stashed changes
         #self.connect()
         self.sql = "UPDATE Appointment SET canceled = %d WHERE pkAppointment = '%d'" % (canceled, appiontmentId)
         return self.sql
@@ -58,7 +62,12 @@ class databaseEvent(Database):
         # self.q =self.query(self.sql)
         # return self.q 
 
+<<<<<<< Updated upstream
     def getAppID(self, name, time, date, userName):
+=======
+    #Get ID
+    def getAppID(self, name, time, date, userName)
+>>>>>>> Stashed changes
     #        self.Database()
     #self.connect()
         self.sql = "SELECT pkAppointment FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.time = %d AND Appointment.date = '%s' AND User.name = '%s'" % (info, name, time, date, userName)

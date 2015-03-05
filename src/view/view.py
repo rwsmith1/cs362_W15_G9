@@ -122,7 +122,7 @@ class View(User):
                             self.stdscr.addstr(3, 30, studentName)
                             self.c = self.stdscr.getch()
                             if self.c == ord('y'):
-                                sql = q.handleApp(self.m)
+                                sql = q.handleApp(app2[0])
                                 self.db.update(sql)
                                 self.stdscr.clear()
                                 self.stdscr.addstr(2, 0, 'Cancelled! - *Press any key for main menu*')

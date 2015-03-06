@@ -11,6 +11,8 @@ import sys
 import time
 from src.database.database import Database
 from src.database.databaseEvent import databaseEvent
+from src.builders.messageBuilder import MessageBuilder
+from src.builders.appointmentBuilder import AppointmentBuilder
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 
@@ -45,11 +47,12 @@ Please contact support@engr.oregonstate.edu if you experience problems."""
 
 # REDACTED@engr.orst.edu; dmcgrath@eecs.oregonstate.edu
 
-inMsg = email.message_from_string(''.join(fullMsg))
+mb = MessageBuilder()
+ab = AppointmentBuilder()
 
-destAddr = inMsg['to']
-sendAddr = inMsg['from']
-subject = inMsg['subject']
+message = mb.buildMessageFromString(fullMsg)
+appointment = ab.buildApptFromMessage(message)
+
 advisorName = ""
 apptStatus = ""
 

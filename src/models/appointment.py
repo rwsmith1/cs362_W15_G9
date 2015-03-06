@@ -3,8 +3,7 @@ __author__ = 'kkozee'
 from src.models.base import Base
 
 class Appointment(Base):
-
-        def __init__(self, id, user, student):
+    def __init__(self, id, user, student):
         self.id = id
         self.canceled = 0
         self.user = user
@@ -30,7 +29,7 @@ class Appointment(Base):
         self.startDateTime = startDateTime
         return self.startDateTime
     
-        def getStartDateTime(self):
+    def getStartDateTime(self):
         return self.startDateTime
 
     def setEndDateTime(self, endDateTime):

@@ -6,8 +6,8 @@ from src.models.messages import Messages
 
 class AppointmentBuilder(Appointment, Messages):
 
-    def __init__(self, id, user, student, time, date, location):
-        super(AppointmentBuilder, self).__init__(id, user, student, time, date, location)
+    def __init__():
+        super(AppointmentBuilder, self).__init__()
 
     def buildApptFromMessage(self):
         if self.subjectParts[0].lower() == "advising" and self.subjectParts[1].lower() == "signup" and self.subjectParts[2].lower() == "with":

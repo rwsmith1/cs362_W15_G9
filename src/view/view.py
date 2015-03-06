@@ -108,7 +108,7 @@ class View(User):
                 self.m = self.stdscr.getch()
                 if self.m != ord('x'):
                     for app2 in appts2:
-                        if self.m == ord(str(app2[0])):
+                        if str(unichr(self.m)) == str(app2[0]):
                             self.stdscr.clear()
                             self.stdscr.addstr('Are you sure you would like to cancel this appointment? (y/n)')
                             self.stdscr.addstr(2, 0, 'Appointment ID')
@@ -125,7 +125,7 @@ class View(User):
                                 sql = q.handleApp(app2[0])
                                 self.db.update(sql)
                                 self.stdscr.clear()
-                                self.stdscr.addstr(2, 0, 'Cancelled! - *Press any key for main menu*')
+                                self.stdscr.addstr('Cancelled! - *Press any key for main menu*')
                             else:
                                 self.stdscr.clear()
                                 self.stdscr.addstr('Not cancelled - *Press any key for main menu*')

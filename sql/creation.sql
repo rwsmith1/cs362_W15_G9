@@ -34,14 +34,15 @@ CREATE TABLE Student (
 /* Appointment: User_id, Student_id, time, date, location */
 DROP TABLE IF EXISTS `Appointment`;
 CREATE TABLE Appointment (
-  `pkMessage` INT(11) NOT NULL AUTO_INCREMENT,
+  `pkAppointment` INT(11) NOT NULL AUTO_INCREMENT,
   `fkUser` INT(11) DEFAULT NULL,
   `fkStudent` INT(11) DEFAULT NULL,
-  `time` INT(11) NOT NULL,
+  `uId` VARCHAR(255) DEFAULT NULL,
+  `timeStart` TIME NOT NULL,
+  `timeEnd` TIME NOT NULL,
   `date` DATE NOT NULL,
-  `location` VARCHAR(255) NOT NULL,
+  `location` VARCHAR(255) DEFAULT NULL,
   `canceled` INT(11) NOT NULL,
-  `parse` VARCHAR(255),
   PRIMARY KEY  (`pkMessage`),
   FOREIGN KEY (`fkUser`) REFERENCES `User` (`pkUser`) ON DELETE SET NULL ON UPDATE CASCADE,
   FOREIGN KEY (`fkStudent`) REFERENCES `Student` (`pkStudent`) ON DELETE SET NULL ON UPDATE CASCADE

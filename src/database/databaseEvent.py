@@ -4,8 +4,8 @@ from database import Database
 
 class databaseEvent(Database):
     #
-	# def __init__(self):
-	# 	Database.__init__(self)
+    # def __init__(self):
+    #   Database.__init__(self)
         # self.q = None
         
     # Insert new Message row to table
@@ -19,10 +19,10 @@ class databaseEvent(Database):
 
 
     # Insert new Appointment row to table
-    def addApp(self, userName, studentName, time, date, location, canceled):
+    def addApp(self, userName, studentName, timeStart, date, location, canceled):
         #self.Database()
         #self.connect()
-        self.sql = "INSERT INTO Appointment (fkUser,fkStudent, time, data, location, canceled) VALUES ((SELECT pkUser FROM User WHERE name = '%s'),(SELECT pkStudent FROM Student WHERE name = '%s'),'%s','%s','%s','%d')" % (userName, studentName, time, date, location, canceled)
+        self.sql = "INSERT INTO Appointment (fkUser,fkStudent, timeStart, data, location, canceled) VALUES ((SELECT pkUser FROM User WHERE name = '%s'),(SELECT pkStudent FROM Student WHERE name = '%s'),'%s','%s','%s','%d')" % (userName, studentName, timeStart, date, location, canceled)
         return self.sql
         # self.q =self.query(self.sql)
         # return self.q 
@@ -31,18 +31,13 @@ class databaseEvent(Database):
     def getApp(self, id):
 #       self.Database()
         #self.connect()
-        self.sql = "SELECT pkAppointment, fkUser, User.name, fkStudent, Student.name, Student.email, time, location, date, canceled FROM User INNER JOIN Appointment ON User.pkUser = Appointment.fkUser INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent WHERE User.pkUser = '%s' ORDER BY Appointment.date" % (id)
+        self.sql = "SELECT pkAppointment, fkUser, User.name, fkStudent, Student.name, Student.email, timeStart, location, date, canceled FROM User INNER JOIN Appointment ON User.pkUser = Appointment.fkUser INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent WHERE User.pkUser = '%s' ORDER BY Appointment.date" % (id)
         return self.sql
         # self.q =self.query(self.sql)
         # return self.q 
 
     # Update Appintment table.
     def handleApp(self, appiontmentId, canceled=1):
-<<<<<<< Updated upstream
-        self = Database()
-=======
-#        self.Database()
->>>>>>> Stashed changes
         #self.connect()
         self.sql = "UPDATE Appointment SET canceled = %d WHERE pkAppointment = '%d'" % (canceled, appiontmentId)
         return self.sql
@@ -62,15 +57,11 @@ class databaseEvent(Database):
         # self.q =self.query(self.sql)
         # return self.q 
 
-<<<<<<< Updated upstream
-    def getAppID(self, name, time, date, userName):
-=======
     #Get ID
-    def getAppID(self, name, time, date, userName)
->>>>>>> Stashed changes
+    def getAppID(self, userName, nameStudent, timeStart, date):
     #        self.Database()
     #self.connect()
-        self.sql = "SELECT pkAppointment FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.time = %d AND Appointment.date = '%s' AND User.name = '%s'" % (info, name, time, date, userName)
+        self.sql = "SELECT pkAppointment FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.timeStart = %d AND Appointment.date = '%s' AND User.name = '%s'" % (info, nameStudent, timeStart, date, userName)
         # self.q =self.query(self.sql)
         # return self.q
         return self.sql

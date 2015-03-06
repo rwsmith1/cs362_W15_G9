@@ -38,7 +38,7 @@ class Filter(Base):
         s.sendmail(self.message.sendAddr, self.message.destAddr, self.message.msg.as_string())
         s.quit()
 
-   def createCalObj(self):
+    def createCalObj(self):
         timecreated = time.strftime('%Y%m%dT%H%M%SZ', time.gmtime())
         uid = timecreated + "@" + socket.gethostname()
         timestart = self.appointment.startDateTime.strftime('%Y%m%dT%H%M%S')

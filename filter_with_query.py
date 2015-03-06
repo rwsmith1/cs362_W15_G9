@@ -111,19 +111,20 @@ db.connect() #might not need
 
 #queries
 q = databaseEvent()
-#username, studentname, uid, time, data, location, canceled
-sql = q.addApp(advisorName, studentName, uid, INSERT_TIME_HERE, INSERT_DATE_HERE)
-add = db.update(sql)
 
+#insert
+# db, userName, studentName, timeStart, date, location, uId, canceled=0
+q.addApp(db, advisorName, studentName, INSERT_TIME_START_HERE, INSERT_TIME_END_HERE, INSERT_DATE_HERE, uid)
+
+#pass db object in the first field
 #return student name, time, date, uid
-sql = getAppID(advisorName, studentName, INSERT_TIME_HERE, INSERT_DATE_HERE)
-array = db.query(sql)
+array = getAppID(db, advisorName, studentName, INSERT_TIMESTART_HERE, INSERT_DATE_HERE)
 
 #Kevin might want this in a message object
 studentVar = str(array[0])
-timeVar = str(array[1])
-dataVar = str(array[2])
-uidVar = str(array[3])
+uidVar = str(array[1])
+timeVar = str(array[2])
+dataVar = str(array[3])
 
 ##############################################
 

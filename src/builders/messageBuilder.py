@@ -48,3 +48,18 @@ class MessageBuilder(Messages):
         self.subjectParts = self.subject.split()
 
         return self
+
+    def buildMessageFromString(self, full_msg):
+        # self.fullMsg = sys.stdin.readlines()
+        self.inMsg = email.message_from_string(''.join(full_msg))
+
+        self.destAddr = inMsg['to']
+        self.sendAddr = inMsg['from']
+        self.subject = inMsg['subject']
+
+        self.subjectParts = self.subject.split()
+
+        self.body = self.inMsg.get_payload()
+        self.bodyParts = self.body.split('\n')
+
+        return self

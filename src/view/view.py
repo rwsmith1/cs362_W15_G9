@@ -60,8 +60,7 @@ class View(User):
                 self.stdscr.addstr(2, 15, 'TIME')
                 self.stdscr.addstr(2, 30, 'STUDENT')
                 self.stdscr.addstr(2, 50, 'STUDENT EMAIL')
-                sql = q.getApp(self.userId)
-                appts = self.db.queryall(sql)
+                appts = q.getApp(self.db, self.userId)                
                 row = 3
                 for app in appts:
                     #studentId = app[3]
@@ -87,8 +86,7 @@ class View(User):
                 self.stdscr.addstr(3, 15, 'DATE')
                 self.stdscr.addstr(3, 30, 'STATUS')
                 self.stdscr.addstr(3, 50, 'STUDENT')
-                sql = q.getApp(self.userId)
-                appts2 = self.db.queryall(sql)
+                appts2 = q.getApp(self.db, self.userId)
                 row = 4
                 for app2 in appts2:
                     appId = str(app2[0])
@@ -108,7 +106,7 @@ class View(User):
                 self.m = self.stdscr.getch()
                 if self.m != ord('x'):
                     for app2 in appts2:
-                        if self.m == ord(str(app2[0])):
+                        if str(unichr(self.m)) == str(app2[0]):
                             self.stdscr.clear()
                             self.stdscr.addstr('Are you sure you would like to cancel this appointment? (y/n)')
                             self.stdscr.addstr(2, 0, 'Appointment ID')
@@ -122,10 +120,9 @@ class View(User):
                             self.stdscr.addstr(3, 30, studentName)
                             self.c = self.stdscr.getch()
                             if self.c == ord('y'):
-                                sql = q.handleApp(app2[0])
-                                self.db.update(sql)
+                                sql = q.handleApp(self.db, app2[0])
                                 self.stdscr.clear()
-                                self.stdscr.addstr(2, 0, 'Cancelled! - *Press any key for main menu*')
+                                self.stdscr.addstr('Cancelled! - *Press any key for main menu*')
                             else:
                                 self.stdscr.clear()
                                 self.stdscr.addstr('Not cancelled - *Press any key for main menu*')

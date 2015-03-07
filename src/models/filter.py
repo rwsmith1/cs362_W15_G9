@@ -1,6 +1,7 @@
 __author__ = 'rwsmith1'
 
 import datetime
+import time
 import smtplib
 from src.models.base import Base
 
@@ -48,7 +49,7 @@ class Filter(Base):
         calendarRequest ="""\
         BEGIN:VCALENDAR
         METHOD:REQUEST
-        PRODID:MAST
+        PRODID:FILTER
         VERSION:2.0
         BEGIN:VEVENT
         CREATED:%s

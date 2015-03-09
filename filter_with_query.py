@@ -16,6 +16,8 @@ from src.builders.appointmentBuilder import AppointmentBuilder
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
 
+# Read in message from the standard input.
+
 #fullMsg = sys.stdin.readlines()
 
 fullMsg = """\
@@ -47,60 +49,27 @@ Please contact support@engr.oregonstate.edu if you experience problems."""
 
 # REDACTED@engr.orst.edu; dmcgrath@eecs.oregonstate.edu
 
+# Build message and appointment objects from inputted string.
+
 mb = MessageBuilder()
 ab = AppointmentBuilder()
 
 message = mb.buildMessageFromString(fullMsg)
 appointment = ab.buildApptFromMessage(message)
 
-advisorName = ""
-apptStatus = ""
-
-subjectParts = inMsg['subject'].split(' ')
-
-if subjectParts[0] == "Advising" and subjectParts[1] == "Signup" and subjectParts[2] == "with":
-    advisorName = subjectParts[3] + " " + subjectParts[4];
-    if subjectParts[5] != "confirmed":
-        advisorName += " " + subjectParts[5]
-        apptStatus = subjectParts[6]
-    else:
-        apptStatus = subjectParts[5]
-
-if subjectParts[0] == "Advising" and subjectParts[1] == "Signup" and subjectParts[2] == "Cancellation":
-    # We should only need both emails, date, and time to cancel an appointment.
-    apptStatus = "cancelled"
-
-body = inMsg.get_payload()
-bodyParts = body.split('\n')
-
-studentName = bodyParts[1].split("Name: ")[1]
-date = bodyParts[3].split("Date: ")[1]
-timeStr = bodyParts[4].split("Time: ")[1]
-
-'''
-Create datetime object to pass to DB.
-'''
-
-dateParts = date.split(',')
-dateString = (dateParts[0] + dateParts[1][0:-2] + dateParts[2]).strip()
-startTimeStr = timeStr.split(" - ")[0]
-endTimeStr = timeStr.split(" - ")[1]
-
-startDateTimeObj = datetime.datetime.strptime(startTimeStr + ' ' + dateString, '%I:%M%p %A %B %d %Y')
-endDateTimeObj = datetime.datetime.strptime(endTimeStr + ' ' + dateString, '%I:%M%p %A %B %d %Y')
-
-
 # Create email.
 msg = MIMEMultipart('alternative')
-msg['Subject'] = subject
-msg['From'] = sendAddr		# Could probably hard code this.
-msg['To'] = destAddr
+msg['Subject'] = 'Message from EECS Advising'   #message.subject
+msg['From'] = message.sendAddr		# Could probably hard code this.
+msg['To'] = message.destAddr
 
 # Create iCalendar object.
 timecreated = time.strftime('%Y%m%dT%H%M%SZ', time.gmtime())
 uid = timecreated + "@" + socket.gethostname()
-timestart = startDateTimeObj.strftime('%Y%m%dT%H%M%S')
-timeend = endDateTimeObj.strftime('%Y%m%dT%H%M%S')
+timestart = appointment.startDateTimeObj.strftime('%Y%m%dT%H%M%S')
+timeend = appointment.endDateTimeObj.strftime('%Y%m%dT%H%M%S')
+calendarRequest = ""
+mimeText = ""
 
 ##############################################
 #############connect to database##############
@@ -112,46 +81,74 @@ db.connect() #might not need
 #queries
 q = databaseEvent()
 
-#insert
-# db, userName, studentName, timeStart, date, location, uId, canceled=0
-q.addApp(db, advisorName, studentName, INSERT_TIME_START_HERE, INSERT_TIME_END_HERE, INSERT_DATE_HERE, uid)
+# If the appointment email is a cancellation, get the original uid from the db so we can include it in
+# the cancelation iCalendar event. Also, mark event as cancelled in db.
+if appointment.getCanceled():
+    # array = getAppID(db, advisorName, studentName, INSERT_TIMESTART_HERE, INSERT_DATE_HERE)
+    array = q.getAppID(db, appointment.name, appointment.student, appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-m-%d'))
+
+    studentVar = str(array[0])
+    uidVar = str(array[1])
+    timeVar = str(array[2])
+    dataVar = str(array[3])
+
+    db.query("UPDATE Appointment SET canceled = 1 WHERE pkAppointment = %s" % (studentVar))
+
+    calendarRequest ="""\
+    BEGIN:VCALENDAR
+    METHOD:CANCEL
+    PRODID:FILTER
+    VERSION:2.0
+    BEGIN:VEVENT
+    CREATED:%s
+    DTSTAMP:%s
+    DTSTART:%s
+    DTEND:%s
+    LAST-MODIFIED:%s
+    SUMMARY:%s
+    UID:%s
+    DESCRIPTION:%s
+    SEQUENCE:0
+    STATUS:CANCELLED
+    TRANSP:OPAQUE
+    END:VEVENT
+    END:VCALENDAR
+    """ % (timecreated, timecreated, timestart, timeend, timecreated, message.subject, uidVar, message.body)
+
+
+# If the request is not a cancellation, add it to the db.
+else:
+    #insert
+    # db, userName, studentName, timeStart, date, location, uId, canceled=0
+    # q.addApp(db, advisorName, studentName, INSERT_TIME_START_HERE, INSERT_TIME_END_HERE, INSERT_DATE_HERE, uid)
+    q.addApp(db, appointment.name, appointment.student, appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getEndDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-m-%d'), uid)
+    calendarRequest ="""\
+    BEGIN:VCALENDAR
+    METHOD:REQUEST
+    PRODID:FILTER
+    VERSION:2.0
+    BEGIN:VEVENT
+    CREATED:%s
+    DTSTAMP:%s
+    DTSTART:%s
+    DTEND:%s
+    LAST-MODIFIED:%s
+    SUMMARY:%s
+    UID:%s
+    DESCRIPTION:%s
+    SEQUENCE:0
+    STATUS:CONFIRMED
+    TRANSP:OPAQUE
+    END:VEVENT
+    END:VCALENDAR
+    """ % (timecreated, timecreated, timestart, timeend, timecreated, message.subject, uid, message.body)
 
 #pass db object in the first field
 #return student name, time, date, uid
-array = getAppID(db, advisorName, studentName, INSERT_TIMESTART_HERE, INSERT_DATE_HERE)
-
-#Kevin might want this in a message object
-studentVar = str(array[0])
-uidVar = str(array[1])
-timeVar = str(array[2])
-dataVar = str(array[3])
 
 ##############################################
 
-mimeText = ""
-calendarRequest ="""\
-BEGIN:VCALENDAR
-METHOD:REQUEST
-PRODID:MAST
-VERSION:2.0
-BEGIN:VEVENT
-CREATED:%s
-DTSTAMP:%s
-DTSTART:%s
-DTEND:%s
-LAST-MODIFIED:%s
-SUMMARY:%s
-UID:%s
-DESCRIPTION:%s
-SEQUENCE:0
-STATUS:CONFIRMED
-TRANSP:OPAQUE
-END:VEVENT
-END:VCALENDAR
-""" % (timecreated, timecreated, timestart, timeend, timecreated, inMsg['subject'], uid, body)
-
-# Variable to hold the calendar request
-# (for when we figure out how to do that.)
+# Assemble email and iCalendar object.
 
 pt1 = MIMEText(mimeText, 'plain')
 pt2 = MIMEText(calendarRequest, 'calendar')
@@ -161,8 +158,7 @@ pt2.add_header('Content-Disposition', 'attachment', method='REQUEST')
 msg.attach(pt1)
 msg.attach(pt2)
 
-# Send the message via OSU Engineering server. We could change this to gmail for
-# ease of testing. Any opinions?
+# Send the message via OSU Engineering server.
 
 s = smtplib.SMTP('mail.engr.oregonstate.edu')
 s.sendmail(sendAddr, destAddr, msg.as_string())

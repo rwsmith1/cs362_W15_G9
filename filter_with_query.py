@@ -78,19 +78,30 @@ mimeText = ""
 db = Database()
 db.connect() #might not need
 
+print "DB connected."
+
 #queries
 q = databaseEvent()
 
 # If the appointment email is a cancellation, get the original uid from the db so we can include it in
 # the cancelation iCalendar event. Also, mark event as cancelled in db.
+
+print "Check for cancelled."
+
 if appointment.getCanceled():
+    print "Request is a cancellation."
     # array = getAppID(db, advisorName, studentName, INSERT_TIMESTART_HERE, INSERT_DATE_HERE)
+
+    print "Getting appt info."
     array = q.getAppID(db, appointment.getUser(), appointment.getStudent(), appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-m-%d'))
 
     studentVar = str(array[0])
     uidVar = str(array[1])
     timeVar = str(array[2])
     dataVar = str(array[3])
+
+
+    print "Setting appointment cancelled."
 
     db.query("UPDATE Appointment SET canceled = 1 WHERE pkAppointment = %s" % (studentVar))
 
@@ -145,6 +156,8 @@ else:
 
 db.close()
 
+print "DB closed."
+
 #pass db object in the first field
 #return student name, time, date, uid
 
@@ -161,6 +174,8 @@ msg.attach(pt1)
 msg.attach(pt2)
 
 # Send the message via OSU Engineering server.
+
+print "Sending email."
 
 s = smtplib.SMTP('mail.engr.oregonstate.edu')
 s.sendmail(message.sendAddr, message.destAddr, msg.as_string())

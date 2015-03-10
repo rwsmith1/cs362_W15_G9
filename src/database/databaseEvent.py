@@ -30,7 +30,7 @@ class databaseEvent(Database):
         # uId = appObj.
         # timeStart = appObj.
         # date = appObj.
-        self.sql = "INSERT INTO Appointment (fkUser,fkStudent, timeStart, timeEnd, data, canceled, uId) VALUES ((SELECT pkUser FROM User WHERE name = '%s'),(SELECT pkStudent FROM Student WHERE name = '%s'),'%s', '%s', '%s','%d','%s')" % (userName, studentName, timeStart, timeEnd, date, canceled, uId)
+        self.sql = "INSERT INTO Appointment (fkUser,fkStudent, timeStart, timeEnd, date, canceled, uId) VALUES ((SELECT pkUser FROM User WHERE name = '%s'),(SELECT pkStudent FROM Student WHERE name = '%s'),'%s', '%s', '%s','%d','%s')" % (userName, studentName, timeStart, timeEnd, date, canceled, uId)
         db.update(self.sql)
 
     ####################################################################

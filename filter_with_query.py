@@ -136,7 +136,7 @@ else:
     print appointment.getStartDateTime().strftime('%Y-%m-%d')
     print uid
     q.addApp(db, appointment.getUser(), appointment.getStudent(), appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getEndDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-%m-%d'), uid, canceled=0)
-    exit() # Testing
+    # exit() # Testing
 
     calendarRequest ="""\
     BEGIN:VCALENDAR

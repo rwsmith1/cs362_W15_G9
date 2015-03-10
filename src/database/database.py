@@ -16,7 +16,7 @@ class Database(object):
             self.db = MySQLdb.connect("mysql.eecs.oregonstate.edu", "cs419-g9", "h8RWjc3qh9QnAJ42", "cs419-g9")
             self.cursor = self.db.cursor()
         except:
-            print "Error: Could not connect to database."
+            print "Error (connect()): Could not connect to database."
 
 
     def close(self):
@@ -31,7 +31,7 @@ class Database(object):
             if self.results is not None:
                 return self.results
         except:
-            print "Error: Could not execute query."
+            print "Error (query): Could not execute query."
 
     def queryall(self, sql):
         # query the database
@@ -41,7 +41,7 @@ class Database(object):
             if self.results is not None:
                 return self.results
         except:
-            print "Error: Could not connect to database."
+            print "Error (queryall): Could not connect to database."
 
     def update(self, sql):
         # update the database
@@ -49,4 +49,4 @@ class Database(object):
             self.cursor.execute(sql)
             self.db.commit()
         except:
-            print "Error: Could not connect to database."
+            print "Error (update): Could not connect to database."

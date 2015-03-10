@@ -10,10 +10,10 @@ class AppointmentBuilder():
 
         if message.subjectParts[0].lower() == "advising" and message.subjectParts[1].lower() == "signup" and message.subjectParts[2].lower() == "with":
             name = message.subjectParts[5] + " " + message.subjectParts[3].replace(',', '')
-            student = message.bodyParts[2].split("Name: ")[1]
-            date = message.bodyParts[4].split("Date: ")[1]
+            student = message.bodyParts[1].split("Name: ")[1]
+            date = message.bodyParts[3].split("Date: ")[1]
 
-            timeStr = message.bodyParts[5].split("Time: ")[1]
+            timeStr = message.bodyParts[4].split("Time: ")[1]
 
             if message.subjectParts[6] == "confirmed":
                 canceled = 0

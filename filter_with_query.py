@@ -121,7 +121,7 @@ else:
     #insert
     # db, userName, studentName, timeStart, date, location, uId, canceled=0
     # q.addApp(db, advisorName, studentName, INSERT_TIME_START_HERE, INSERT_TIME_END_HERE, INSERT_DATE_HERE, uid)
-    q.addApp(db, appointment.name, appointment.student, appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getEndDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-m-%d'), uid)
+    q.addApp(db, appointment.getUser(), appointment.getStudent(), appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getEndDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-m-%d'), uid)
     calendarRequest ="""\
     BEGIN:VCALENDAR
     METHOD:REQUEST

@@ -69,7 +69,7 @@ class databaseEvent(Database):
     #       3. date
     ####################################################################
     def getAppID(self, db, userName, studentName, timeStart, date):
-        self.sql = "SELECT pkAppointment, uId, timeStart, date FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.timeStart = %d AND Appointment.date = '%s' AND User.name = '%s'" % (info, studentName, timeStart, date, userName)
+        self.sql = "SELECT pkAppointment, uId, timeStart, date FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.timeStart = %d AND Appointment.date = '%s' AND User.name = '%s'" % (studentName, timeStart, date, userName)
         q = db.query(self.sql)
         return q
 

@@ -1,8 +1,10 @@
 __author__ = 'holly'
 
 import sys
+import smtplib
 import curses
 from curses import wrapper
+from email.mime.text import MIMEText
 from src.models.user import User
 from src.database.database import Database
 from src.database.databaseEvent import databaseEvent
@@ -60,7 +62,7 @@ class View(User):
                 self.stdscr.addstr(2, 15, 'TIME')
                 self.stdscr.addstr(2, 30, 'STUDENT')
                 self.stdscr.addstr(2, 50, 'STUDENT EMAIL')
-                appts = q.getApp(self.db, self.userId)                
+                appts = q.getApp(self.db, self.userId)
                 row = 3
                 for app in appts:
                     #studentId = app[3]
@@ -115,12 +117,17 @@ class View(User):
                             appId = str(app2[0])
                             studentName = str(app2[4])
                             date = str(app2[8])
+                            emailDate = app2[8]
+                            time = str(app2[6])
+                            #emailTime = app2[6]
+                            studentEmail = str(app2[5])
                             self.stdscr.addstr(3, 0, appId)
                             self.stdscr.addstr(3, 15, date)
                             self.stdscr.addstr(3, 30, studentName)
                             self.c = self.stdscr.getch()
                             if self.c == ord('y'):
                                 sql = q.handleApp(self.db, app2[0])
+                                self.sendCancellation(self.currentUsername, self.email, studentName, studentEmail, emailDate, time)
                                 self.stdscr.clear()
                                 self.stdscr.addstr('Cancelled! - *Press any key for main menu*')
                             else:
@@ -132,3 +139,30 @@ class View(User):
     def initWrapper(self):
         # curses wrapper initiates and exits window/curses
         wrapper(self.initView())
+
+    def sendCancellation(self, name, email, student_name, student_email, date, time):
+        self.db = Database()
+        self.db.connect()
+        dateStr = date.strftime('%A, %B %d, %Y')
+        #timeStr = time.strftime('%I:%M%p')
+        fromAddr = 'do.not.reply@engr.orst.edu'
+        toAddr = email
+        #toAddr = 'harmonh@onid.oregonstate.edu'
+        body = """\
+        Advising Signup with %s CANCELLED
+        Name: %s
+        Email: %s
+        Date: %s
+        Time: %s
+        Please contact support@engr.oregonstate.edu if you experience problems.
+        """ % (name, student_name, student_email, dateStr, time)
+
+        msg = MIMEText(body, 'plain')
+
+        msg['Subject'] = 'Advising Signup with %s CANCELLED.' % name
+        msg['From'] = fromAddr
+        msg['To'] = toAddr
+
+        s = smtplib.SMTP('mail.engr.oregonstate.edu')
+        s.sendmail(fromAddr, toAddr, msg.as_string())
+        s.quit()

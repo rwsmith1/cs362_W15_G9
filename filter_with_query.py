@@ -85,7 +85,7 @@ q = databaseEvent()
 # the cancelation iCalendar event. Also, mark event as cancelled in db.
 if appointment.getCanceled():
     # array = getAppID(db, advisorName, studentName, INSERT_TIMESTART_HERE, INSERT_DATE_HERE)
-    array = q.getAppID(db, appointment.name, appointment.student, appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-m-%d'))
+    array = q.getAppID(db, appointment.getUser(), appointment.getStudent(), appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-m-%d'))
 
     studentVar = str(array[0])
     uidVar = str(array[1])
@@ -142,6 +142,8 @@ else:
     END:VEVENT
     END:VCALENDAR
     """ % (timecreated, timecreated, timestart, timeend, timecreated, message.subject, uid, message.body)
+
+db.close()
 
 #pass db object in the first field
 #return student name, time, date, uid

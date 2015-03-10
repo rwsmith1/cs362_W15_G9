@@ -76,7 +76,13 @@ mimeText = ""
 ##############################################
 
 db = Database()
-db.connect() #might not need
+
+try:
+    db.connect() #might not need
+
+except:
+    print "Could not connect to db."
+    exit()
 
 print "DB connected."
 
@@ -92,8 +98,12 @@ if appointment.getCanceled():
     print "Request is a cancellation."
     # array = getAppID(db, advisorName, studentName, INSERT_TIMESTART_HERE, INSERT_DATE_HERE)
 
-    print "Getting appt info."
-    array = q.getAppID(db, appointment.getUser(), appointment.getStudent(), appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-m-%d'))
+    try:
+        print "Getting appt info."
+        array = q.getAppID(db, appointment.getUser(), appointment.getStudent(), appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-m-%d'))
+    except:
+        print "Could not get appt. info."
+        exit()
 
     studentVar = str(array[0])
     uidVar = str(array[1])
@@ -101,9 +111,14 @@ if appointment.getCanceled():
     dataVar = str(array[3])
 
 
-    print "Setting appointment cancelled."
+    try:
+        print "Setting appointment cancelled."
+        db.query("UPDATE Appointment SET canceled = 1 WHERE pkAppointment = %s" % (studentVar))
 
-    db.query("UPDATE Appointment SET canceled = 1 WHERE pkAppointment = %s" % (studentVar))
+    except:
+        print "Could not set cancellation in db."
+        exit()
+
 
     calendarRequest ="""\
     BEGIN:VCALENDAR
@@ -129,10 +144,16 @@ if appointment.getCanceled():
 
 # If the request is not a cancellation, add it to the db.
 else:
+    print "Message is an appointment request."
     #insert
     # db, userName, studentName, timeStart, date, location, uId, canceled=0
     # q.addApp(db, advisorName, studentName, INSERT_TIME_START_HERE, INSERT_TIME_END_HERE, INSERT_DATE_HERE, uid)
-    q.addApp(db, appointment.getUser(), appointment.getStudent(), appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getEndDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-m-%d'), uid)
+    try:
+        q.addApp(db, appointment.getUser(), appointment.getStudent(), appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getEndDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-m-%d'), uid)
+    except:
+        print "Could not add appt to db."
+        exit()
+
     calendarRequest ="""\
     BEGIN:VCALENDAR
     METHOD:REQUEST

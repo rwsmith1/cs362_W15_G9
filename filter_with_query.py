@@ -161,6 +161,6 @@ msg.attach(pt2)
 # Send the message via OSU Engineering server.
 
 s = smtplib.SMTP('mail.engr.oregonstate.edu')
-s.sendmail(sendAddr, destAddr, msg.as_string())
+s.sendmail(message.sendAddr, message.destAddr, msg.as_string())
 s.quit()
 exit()

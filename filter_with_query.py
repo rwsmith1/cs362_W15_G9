@@ -106,6 +106,11 @@ if appointment.getCanceled():
     print "Request is a cancellation."
     # array = getAppID(db, advisorName, studentName, INSERT_TIMESTART_HERE, INSERT_DATE_HERE)
 
+    print appointment.getUser()
+    print appointment.getStudent()
+    print appointment.getStartDateTime().strftime('%H:%M:%S')
+    print appointment.getStartDateTime().strftime('%Y-m-%d')
+
     array = q.getAppID(db, appointment.getUser(), appointment.getStudent(), appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-m-%d'))
 
     studentVar = str(array[0])

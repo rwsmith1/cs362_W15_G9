@@ -111,7 +111,7 @@ if appointment.getCanceled():
     print appointment.getStartDateTime().strftime('%H:%M:%S')
     print appointment.getStartDateTime().strftime('%Y-m-%d')
 
-    array = q.getAppID(db, appointment.getUser(), appointment.getStudent(), appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-m-%d'))
+    array = q.getAppID(db, appointment.getUser(), appointment.getStudent(), appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-%m-%d'))
 
     studentVar = str(array[0])
     uidVar = str(array[1])

@@ -66,8 +66,8 @@ msg['To'] = message.destAddr
 # Create iCalendar object.
 timecreated = time.strftime('%Y%m%dT%H%M%SZ', time.gmtime())
 uid = timecreated + "@" + socket.gethostname()
-timestart = appointment.startDateTimeObj.strftime('%Y%m%dT%H%M%S')
-timeend = appointment.endDateTimeObj.strftime('%Y%m%dT%H%M%S')
+timestart = appointment.getStartDateTime().strftime('%Y%m%dT%H%M%S')
+timeend = appointment.getEndDateTime().strftime('%Y%m%dT%H%M%S')
 calendarRequest = ""
 mimeText = ""
 

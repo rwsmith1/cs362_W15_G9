@@ -82,7 +82,6 @@ db.connect() #might not need
 #queries
 q = databaseEvent()
 
-exit()
 # If the appointment email is a cancellation, get the original uid from the db so we can include it in
 # the cancelation iCalendar event. Also, mark event as cancelled in db.
 
@@ -130,7 +129,13 @@ else:
     #insert
     # db, userName, studentName, timeStart, date, location, uId, canceled=0
     # q.addApp(db, advisorName, studentName, INSERT_TIME_START_HERE, INSERT_TIME_END_HERE, INSERT_DATE_HERE, uid)
-    q.addApp(db, appointment.getUser(), appointment.getStudent(), appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getEndDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-%m-%d'), uid)
+    print appointment.getUser()
+    print appointment.getStudent()
+    print appointment.getStartDateTime().strftime('%H:%M:%S')
+    print appointment.getEndDateTime().strftime('%H:%M:%S')
+    print appointment.getStartDateTime().strftime('%Y-%m-%d')
+    print uid
+    q.addApp(db, appointment.getUser(), appointment.getStudent(), appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getEndDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-%m-%d'), uid, canceled=0)
     exit() # Testing
 
     calendarRequest ="""\

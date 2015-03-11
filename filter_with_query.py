@@ -121,25 +121,25 @@ if appointment.getCanceled():
     db.query("UPDATE Appointment SET canceled = 1 WHERE pkAppointment = %s" % (studentVar))
 
     calendarRequest ="""\
-    BEGIN:VCALENDAR
-    METHOD:CANCEL
-    PRODID:FILTER
-    VERSION:2.0
-    BEGIN:VEVENT
-    CREATED:%s
-    DTSTAMP:%s
-    DTSTART:%s
-    DTEND:%s
-    LAST-MODIFIED:%s
-    SUMMARY:%s
-    UID:%s
-    DESCRIPTION:%s
-    SEQUENCE:0
-    STATUS:CANCELLED
-    TRANSP:OPAQUE
-    END:VEVENT
-    END:VCALENDAR
-    """ % (timecreated, timecreated, timestart, timeend, timecreated, message.subject, uidVar, message.body)
+BEGIN:VCALENDAR
+METHOD:CANCEL
+PRODID:FILTER
+VERSION:2.0
+BEGIN:VEVENT
+CREATED:%s
+DTSTAMP:%s
+DTSTART:%s
+DTEND:%s
+LAST-MODIFIED:%s
+SUMMARY:%s
+UID:%s
+DESCRIPTION:%s
+SEQUENCE:0
+STATUS:CANCELLED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR
+""" % (timecreated, timecreated, timestart, timeend, timecreated, message.subject, uidVar, message.body)
 
 
 # If the request is not a cancellation, add it to the db.
@@ -152,25 +152,25 @@ else:
     # exit() # Testing
 
     calendarRequest ="""\
-    BEGIN:VCALENDAR
-    METHOD:REQUEST
-    PRODID:FILTER
-    VERSION:2.0
-    BEGIN:VEVENT
-    CREATED:%s
-    DTSTAMP:%s
-    DTSTART:%s
-    DTEND:%s
-    LAST-MODIFIED:%s
-    SUMMARY:%s
-    UID:%s
-    DESCRIPTION:%s
-    SEQUENCE:0
-    STATUS:CONFIRMED
-    TRANSP:OPAQUE
-    END:VEVENT
-    END:VCALENDAR
-    """ % (timecreated, timecreated, timestart, timeend, timecreated, message.subject, uid, message.body)
+BEGIN:VCALENDAR
+METHOD:REQUEST
+PRODID:FILTER
+VERSION:2.0
+BEGIN:VEVENT
+CREATED:%s
+DTSTAMP:%s
+DTSTART:%s
+DTEND:%s
+LAST-MODIFIED:%s
+SUMMARY:%s
+UID:%s
+DESCRIPTION:%s
+SEQUENCE:0
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR
+""" % (timecreated, timecreated, timestart, timeend, timecreated, message.subject, uid, message.body)
 
 db.close()
 

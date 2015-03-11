@@ -20,7 +20,6 @@ from email.MIMEText import MIMEText
 
 #fullMsg = sys.stdin.readlines()
 
-'''
 fullMsg = """\
 From: do.not.reply@engr.orst.edu
 Sent: Monday, November 26, 2012 19:15
@@ -33,12 +32,12 @@ Date: Wednesday, November 21st, 2012
 Time: 1:00pm - 1:15pm
 Please contact support@engr.oregonstate.edu if you experience problems
 """
-'''
 
+'''
 fullMsg = """\
     From: do.not.reply@engr.orst.edu
 Sent: Thursday, November 15, 2012 10:11
-To: smithrog@engr.oregonstate.edu
+To: smithrog@engr.oregonstate.edu, smithrog@onid.oregonstate.edu
 Subject: Advising Signup Cancellation
 Advising Signup with McGrath, D Kevin CANCELLED
 Name: REDACTED
@@ -46,13 +45,13 @@ Email: REDACTED@engr.orst.edu
 Date: Wednesday, November 21st, 2012
 Time: 1:00pm - 1:15pm
 Please contact support@engr.oregonstate.edu if you experience problems."""
-
+'''
 
 '''
 fullMsg = """\
     From: do.not.reply@engr.orst.edu
 Sent: Thursday, November 15, 2012 10:11
-To: smithrog@engr.oregonstate.edu
+To: smithrog@engr.oregonstate.edu, smithrog@onid.oregonstate.edu
 Subject: Advising Signup Cancellation
 Advising Signup with McGrath, D Kevin CANCELLED
 Name: REDACTED

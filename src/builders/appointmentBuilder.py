@@ -12,7 +12,6 @@ class AppointmentBuilder():
             name = message.subjectParts[5] + " " + message.subjectParts[3].replace(',', '')
             student = message.bodyParts[1].split("Name: ")[1]
             date = message.bodyParts[3].split("Date: ")[1]
-
             timeStr = message.bodyParts[4].split("Time: ")[1]
 
             if message.subjectParts[6] == "confirmed":
@@ -33,6 +32,10 @@ class AppointmentBuilder():
 
         appt = Appointment(name, student)
         appt.setCanceled(canceled)
+
+        studentEmail = message.bodyParts[2].split('Email: ')[1]
+
+        appt.setStudentEmail(studentEmail)
 
         startDateTime = datetime.datetime.strptime(startTimeStr + ' ' + dateString, '%I:%M%p %A %B %d %Y')
         endDateTime = datetime.datetime.strptime(endTimeStr + ' ' + dateString, '%I:%M%p %A %B %d %Y')

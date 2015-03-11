@@ -24,8 +24,7 @@ class View(User):
     def validateUser(self):
         self.db = Database()
         self.db.connect()
-        sql = "SELECT * FROM User WHERE name = '%s'" % (self.currentUsername)
-        results = self.db.query(sql)
+        results = databaseEvent().getInfo(self.db, self.currentUsername)
 
         if results is not None:
             self.userId = results[0]

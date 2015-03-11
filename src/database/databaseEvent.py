@@ -1,6 +1,9 @@
 __author__ = 'disatapp'
 
+import time
+import datetime
 from database import Database
+from src.builders.appointmentBuilder import AppointmentBuilder
 
 class databaseEvent(Database):
     #
@@ -12,26 +15,42 @@ class databaseEvent(Database):
     # Insert new Message row to table
     # Parameter: db = database object
     ####################################################################
-    def createMessage(self, db, userName, studentName, Message):
-        #self.Database()
-        #self.connect()
-        self.sql = "INSERT INTO Message (fkUser,fkStudent,mailbox) VALUES ((SELECT pkUser FROM User WHERE name = '%s'),(SELECT pkStudent FROM Student WHERE name = '%s'),%s)" % (userName, studentName, Message)
+    def _createMessage(self, db, userEmail, studentName, Message):
+        self.sql = "INSERT INTO Message (fkUser,fkStudent,mailbox) VALUES ((SELECT pkUser FROM User WHERE email = '%s'),(SELECT pkStudent FROM Student WHERE name = '%s'),%s)" % (userEmail, studentName, Message)
+        db.update(self.sql)
+
+    ####################################################################      
+    # Insert new Message row to table
+    # Parameter: db = database object
+    ####################################################################
+    def _createUser(self, db, fName, lName, password, email):
+        self.sql = "INSERT INTO User (fname, lname, password, email) VALUES (%s,%s,%s,%s,%s)" % (fName, lName, password, email)
+        db.update(self.sql)
+
+    ####################################################################      
+    # Insert new Message row to table
+    # Parameter: db = database object
+    ####################################################################
+    def _createStudent(self, db, studentName, studentEmail):
+        self.sql = "INSERT INTO Student (name, email) VALUES (%s,%s)" % (studentName, studentEmail)
         db.update(self.sql)
         
     ####################################################################
     # Insert new Appointment row to table location null
     # Parameter: db = database object
     ####################################################################
-    def addApp(self, db, userName, studentName, timeStart, timeEnd, date, uId, canceled=0):
-        # self.Database()
-        # self.connect()
-        # userName = appObj.
-        # studentName = appObj.
-        # uId = appObj.
-        # timeStart = appObj.
-        # date = appObj.
-        self.sql = "INSERT INTO Appointment (fkUser,fkStudent, timeStart, timeEnd, date, canceled, uId) VALUES ((SELECT pkUser FROM User WHERE name = '%s'),(SELECT pkStudent FROM Student WHERE name = '%s'),'%s', '%s', '%s','%d','%s')" % (userName, studentName, timeStart, timeEnd, date, canceled, uId)
-        db.update(self.sql)
+    def addApp(self, db, userEmail, studentName, studentEmail, timeStart, timeEnd, date, uId, canceled=0):
+        # userEmail = appointment.getUser()
+        # studentName = appointment.getStudent()
+        # studentEmail = appointment.getStartDateTime().strftime('%H:%M:%S')
+        # timeStart = appointment.getEndDateTime().strftime('%H:%M:%S')
+        # timeEnd = appointment.getStartDateTime().strftime('%Y-%m-%d')
+
+        if not self.getInfo(db, studentEmail, 1):
+            self._createStudent(studentName, studentEmail)
+        if self.getInfo(db, userEmail):
+            self.sql = "INSERT INTO Appointment (fkUser,fkStudent,timeStart, timeEnd, data, canceled, uId) VALUES ((SELECT pkUser FROM User WHERE email = '%s'),(SELECT pkStudent FROM Student WHERE email = '%s'),'%s', '%s', '%s','%d','%s')" % (email, studentEmail, timeStart, timeEnd, date, canceled, uId)
+            db.update(self.sql)
 
     ####################################################################
     # Update Appintment table. 
@@ -43,19 +62,19 @@ class databaseEvent(Database):
 
     ####################################################################
     # Get info from a student or user
-    # Parameter: db = database object
+    # Parameter: db = database object, email of user or student
     # Returns:
-    #       0. user name
+    #       0. student name
     #       1. email
     ####################################################################
-    def getInfo(self, db, name, table=0):
+    def getInfo(self, db, email, table=0):
         # self.Database()
         # self.connect()
-        if table == 1:
+        if table == 0:
             info = 'User'
         else:
             info = 'Student'
-        self.sql = "SELECT * FROM %s WHERE name = '%s'" % (info, name)
+        self.sql = "SELECT * FROM %s WHERE email = '%s'" % (info, name)
         q = db.query(self.sql)
         return q 
 
@@ -68,10 +87,20 @@ class databaseEvent(Database):
     #       2. timeStart
     #       3. date
     ####################################################################
-    def getAppID(self, db, userName, studentName, timeStart, date):
+    def getAppID(self, db, userEmail, studentName, timeStart, date):
         self.sql = "SELECT pkAppointment, uId, timeStart, date FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.timeStart = %s AND Appointment.date = '%s' AND User.name = '%s'" % (studentName, timeStart, date, userName)
-        q = db.query(self.sql)
-        return q
+        self.q = db.query(self.sql)
+        return self.q
+    # def getAppID(self, db, appointment):
+    #     userEmail = appointment.getUser()
+    #     studentName = appointment.getStudent()
+    #     timeStart = appointment.getStartDateTime().strftime('%H:%M:%S')
+    #     data = appointment.getStartDateTime().strftime('%Y-%m-%d')
+
+    #     self.sql = "SELECT pkAppointment, uId, timeStart, date FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.timeStart = %s AND Appointment.date = '%s' AND User.name = '%s'" % (studentName, timeStart, date, userName)
+    #     q = db.query(self.sql)
+    #     return q
+
 
     ####################################################################
     # Get Appointment info 

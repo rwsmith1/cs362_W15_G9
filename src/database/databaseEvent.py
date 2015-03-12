@@ -39,12 +39,14 @@ class databaseEvent(Database):
     # Insert new Appointment row to table location null
     # Parameter: db = database object
     ####################################################################
-    def addApp(self, db, userEmail, studentName, studentEmail, timeStart, timeEnd, date, uId, canceled=0):
-        # userEmail = appointment.getUser()
-        # studentName = appointment.getStudent()
-        # studentEmail = appointment.getStartDateTime().strftime('%H:%M:%S')
-        # timeStart = appointment.getEndDateTime().strftime('%H:%M:%S')
-        # timeEnd = appointment.getStartDateTime().strftime('%Y-%m-%d')
+    def addApp(self, db, appointment, uId, canceled=0):
+        userEmail = appointment.getUser()
+        studentName = appointment.getStudent()
+        studentEmail = appointment.getStudentEmail()
+        studentEmail = appointment.getStartDateTime().strftime('%H:%M:%S')
+        timeStart = appointment.getEndDateTime().strftime('%H:%M:%S')
+        timeEnd = appointment.getStartDateTime().strftime('%Y-%m-%d')
+        data = appointment.getDate()
 
         if not self.getInfo(db, studentEmail, 1):
             self._createStudent(studentName, studentEmail)
@@ -87,19 +89,19 @@ class databaseEvent(Database):
     #       2. timeStart
     #       3. date
     ####################################################################
-    def getAppID(self, db, userEmail, studentName, timeStart, date):
-        self.sql = "SELECT pkAppointment, uId, timeStart, date FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.timeStart = %s AND Appointment.date = '%s' AND User.name = '%s'" % (studentName, timeStart, date, userName)
-        self.q = db.query(self.sql)
-        return self.q
-    # def getAppID(self, db, appointment):
-    #     userEmail = appointment.getUser()
-    #     studentName = appointment.getStudent()
-    #     timeStart = appointment.getStartDateTime().strftime('%H:%M:%S')
-    #     data = appointment.getStartDateTime().strftime('%Y-%m-%d')
-
+    # def getAppID(self, db, userEmail, studentName, timeStart, date):
     #     self.sql = "SELECT pkAppointment, uId, timeStart, date FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.timeStart = %s AND Appointment.date = '%s' AND User.name = '%s'" % (studentName, timeStart, date, userName)
-    #     q = db.query(self.sql)
-    #     return q
+    #     self.q = db.query(self.sql)
+    #     return self.q
+    def getAppID(self, db, appointment):
+        userEmail = appointment.getUser()
+        studentName = appointment.getStudent()
+        timeStart = appointment.getStartDateTime().strftime('%H:%M:%S')
+        date = appointment.getStartDateTime().strftime('%Y-%m-%d')
+
+        self.sql = "SELECT pkAppointment, uId, timeStart, date FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.timeStart = %s AND Appointment.date = '%s' AND User.name = '%s'" % (studentName, timeStart, date, userName)
+        q = db.query(self.sql)
+        return q
 
 
     ####################################################################

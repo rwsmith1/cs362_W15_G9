@@ -76,7 +76,7 @@ class databaseEvent(Database):
             info = 'User'
         else:
             info = 'Student'
-        self.sql = "SELECT * FROM %s WHERE email = '%s'" % (info, name)
+        self.sql = "SELECT * FROM %s WHERE email = '%s'" % (info, email)
         q = db.query(self.sql)
         return q 
 
@@ -121,6 +121,6 @@ class databaseEvent(Database):
     #       10. uId
     ####################################################################
     def getApp(self, db, id):
-        self.sql = "SELECT pkAppointment, fkUser, User.name, fkStudent, Student.name, Student.email, timeStart, location, date, canceled, uId FROM User INNER JOIN Appointment ON User.pkUser = Appointment.fkUser INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent WHERE User.pkUser = '%s' ORDER BY Appointment.date" % (id)
+        self.sql = "SELECT pkAppointment, fkUser, User.name, fkStudent, Student.name, Student.email, timeStart, timeEnd, location, date, canceled, uId FROM User INNER JOIN Appointment ON User.pkUser = Appointment.fkUser INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent WHERE User.pkUser = '%s' ORDER BY Appointment.date" % (id)
         self.q = db.queryall(self.sql)
         return self.q 

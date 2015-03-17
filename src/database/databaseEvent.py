@@ -48,7 +48,7 @@ class databaseEvent(Database):
         userEmail = appointment.getUserEmail()
         studentName = appointment.getStudent()
         studentEmail = appointment.getStudentEmail()
-        timeStart = appointment.getEndDateTime().strftime('%H:%M:%S')
+        timeStart = appointment.getStartDateTime().strftime('%H:%M:%S')
         timeEnd = appointment.getEndDateTime().strftime('%H:%M:%S')
         date = appointment.getStartDateTime().strftime('%Y-%m-%d')
 

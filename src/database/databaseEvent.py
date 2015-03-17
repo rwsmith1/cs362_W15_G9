@@ -94,7 +94,7 @@ class databaseEvent(Database):
     #     self.q = db.query(self.sql)
     #     return self.q
     def getAppID(self, db, appointment):
-        userEmail = appointment.getUserEmail()
+        userEmail = appointment.getUser()
         studentName = appointment.getStudent()
         timeStart = appointment.getStartDateTime().strftime('%H:%M:%S')
         date = appointment.getStartDateTime().strftime('%Y-%m-%d')

@@ -33,6 +33,10 @@ class databaseEvent(Database):
     ####################################################################
     def _createStudent(self, db, studentName, studentEmail):
         self.sql = "INSERT INTO Student (name, email) VALUES (%s,%s)" % (studentName, studentEmail)
+        #### Added for debugging
+        print "Attempting to add new student. Query:\n"
+        print self.sql
+        ####
         db.update(self.sql)
         
     ####################################################################

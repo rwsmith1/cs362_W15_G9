@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38341fd2-16aa-4066-bc2e-b4b95f74bd52" name="Default" comment="Updates for filter functionality.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/cs362_W15_G9.iml" afterPath="$PROJECT_DIR$/.idea/cs362_W15_G9.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/database/databaseEvent.py" afterPath="$PROJECT_DIR$/src/database/databaseEvent.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/filter_with_query.py" afterPath="$PROJECT_DIR$/filter_with_query.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="cs362_W15_G9.iws" />
@@ -35,8 +35,20 @@
       <file leaf-file-name="filter_with_query.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/filter_with_query.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3135392" vertical-offset="0" max-vertical-offset="4440">
-              <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
+            <state vertical-scroll-proportion="0.9622642" vertical-offset="696" max-vertical-offset="4776">
+              <caret line="63" column="22" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
+              <folding>
+                <element signature="e#26#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="appointment.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/models/appointment.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="576" max-vertical-offset="1584">
+              <caret line="0" column="20" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -45,21 +57,21 @@
       <file leaf-file-name="databaseEvent.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/database/databaseEvent.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="670" max-vertical-offset="3096">
-              <caret line="41" column="6" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="942" max-vertical-offset="3096">
+              <caret line="62" column="26" selection-start-line="62" selection-start-column="26" selection-end-line="62" selection-end-column="26" />
               <folding>
-                <marker date="1426600545729" expanded="true" signature="573:726" placeholder="INSERT INTO ..." />
-                <marker date="1426600545729" expanded="true" signature="629:671" placeholder="SELECT pkUse..User..." />
-                <marker date="1426600545729" expanded="true" signature="674:721" placeholder="SELECT pkStu..Student..." />
-                <marker date="1426600545729" expanded="true" signature="1103:1175" placeholder="INSERT INTO ..." />
-                <marker date="1426600545729" expanded="true" signature="1549:1597" placeholder="INSERT INTO ..." />
-                <marker date="1426600545729" expanded="true" signature="2530:2744" placeholder="INSERT INTO ..." />
-                <marker date="1426600545729" expanded="true" signature="2622:2664" placeholder="SELECT pkUse..User..." />
-                <marker date="1426600545729" expanded="true" signature="2667:2715" placeholder="SELECT pkStu..Student..." />
-                <marker date="1426600545729" expanded="true" signature="3136:3199" placeholder="UPDATE Appoi..." />
-                <marker date="1426600545729" expanded="true" signature="3776:3811" placeholder="SELECT * FRO..missing_value..." />
-                <marker date="1426600545729" expanded="true" signature="4980:5261" placeholder="SELECT pkApp..." />
-                <marker date="1426600545729" expanded="true" signature="5900:6214" placeholder="SELECT pkApp..." />
+                <marker date="1426602376746" expanded="true" signature="573:726" placeholder="INSERT INTO ..." />
+                <marker date="1426602376746" expanded="true" signature="629:671" placeholder="SELECT pkUse..User..." />
+                <marker date="1426602376746" expanded="true" signature="674:721" placeholder="SELECT pkStu..Student..." />
+                <marker date="1426602376746" expanded="true" signature="1103:1175" placeholder="INSERT INTO ..." />
+                <marker date="1426602376746" expanded="true" signature="1549:1597" placeholder="INSERT INTO ..." />
+                <marker date="1426602376746" expanded="true" signature="2535:2749" placeholder="INSERT INTO ..." />
+                <marker date="1426602376746" expanded="true" signature="2627:2669" placeholder="SELECT pkUse..User..." />
+                <marker date="1426602376746" expanded="true" signature="2672:2720" placeholder="SELECT pkStu..Student..." />
+                <marker date="1426602376746" expanded="true" signature="3141:3204" placeholder="UPDATE Appoi..." />
+                <marker date="1426602376746" expanded="true" signature="3781:3816" placeholder="SELECT * FRO..missing_value..." />
+                <marker date="1426602376746" expanded="true" signature="4985:5266" placeholder="SELECT pkApp..." />
+                <marker date="1426602376746" expanded="true" signature="5905:6219" placeholder="SELECT pkApp..." />
               </folding>
             </state>
           </provider>
@@ -68,8 +80,8 @@
       <file leaf-file-name="database.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/database/database.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="321" max-vertical-offset="1392">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="1392">
+              <caret line="45" column="25" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -99,7 +111,6 @@
         <option value="$PROJECT_DIR$/src/models/filter.py" />
         <option value="$PROJECT_DIR$/cancellation_email_generator.py" />
         <option value="$PROJECT_DIR$/src/database/database.py" />
-        <option value="$PROJECT_DIR$/src/database/databaseEvent.py" />
         <option value="$PROJECT_DIR$/src/models/appointment.py" />
         <option value="$PROJECT_DIR$/src/builders/appointmentBuilder.py" />
         <option value="$PROJECT_DIR$/src/builders/messageBuilder.py" />
@@ -138,6 +149,7 @@
         <option value="$PROJECT_DIR$/../!OSU/4_Winter/496_Mob_Dev/rws-cs496-final-api/bike.py" />
         <option value="$PROJECT_DIR$/../!OSU/4_Winter/496_Mob_Dev/rws-cs496-final/admin.py" />
         <option value="$PROJECT_DIR$/../!OSU/4_Winter/496_Mob_Dev/rws-cs496-final/frontpage.py" />
+        <option value="$PROJECT_DIR$/src/database/databaseEvent.py" />
         <option value="$PROJECT_DIR$/filter_with_query.py" />
       </list>
     </option>
@@ -204,6 +216,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cs362_W15_G9" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cs362_W15_G9" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2854,7 +2884,19 @@
       <option name="project" value="LOCAL" />
       <updated>1426601990708</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Updates for filter functionality.">
+      <created>1426602014876</created>
+      <option name="number" value="00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1426602014876</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Updates for filter functionality.">
+      <created>1426602286633</created>
+      <option name="number" value="00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1426602286633</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2884,14 +2926,15 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32401812" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329602" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33308157" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32854986" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33308157" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33308157" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22205438" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2439577" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1200318" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32854986" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39925373" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2901,7 +2944,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32930514" sideWeight="0.5552464" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854986" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -2959,13 +3001,6 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="792" max-vertical-offset="1440">
           <caret line="33" column="23" selection-start-line="33" selection-start-column="23" selection-end-line="33" selection-end-column="23" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/appointment.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1584">
-          <caret line="0" column="20" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -3192,7 +3227,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="148" max-vertical-offset="1008">
           <caret line="26" column="39" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
           <folding>
-            <element signature="e#26#64#0" expanded="true" />
+            <element signature="e#26#64#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3226,7 +3261,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="4486" max-vertical-offset="5736">
           <caret line="200" column="0" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
           <folding>
-            <element signature="e#641#652#0" expanded="true" />
+            <element signature="e#641#652#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3244,7 +3279,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1872">
           <caret line="7" column="66" selection-start-line="7" selection-start-column="66" selection-end-line="7" selection-end-column="66" />
           <folding>
-            <element signature="e#158#196#0" expanded="true" />
+            <element signature="e#158#196#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3286,7 +3321,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="1896">
           <caret line="66" column="2" selection-start-line="66" selection-start-column="2" selection-end-line="66" selection-end-column="2" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3296,45 +3331,55 @@
         <state vertical-scroll-proportion="0.79809976" vertical-offset="3240" max-vertical-offset="4968">
           <caret line="163" column="20" selection-start-line="163" selection-start-column="20" selection-end-line="163" selection-end-column="20" />
           <folding>
-            <element signature="e#199#237#0" expanded="true" />
+            <element signature="e#199#237#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/appointment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="576" max-vertical-offset="1584">
+          <caret line="0" column="20" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/database/database.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1392">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="1392">
+          <caret line="45" column="25" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/database/databaseEvent.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="670" max-vertical-offset="3096">
-          <caret line="41" column="6" selection-start-line="41" selection-start-column="6" selection-end-line="41" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="942" max-vertical-offset="3096">
+          <caret line="62" column="26" selection-start-line="62" selection-start-column="26" selection-end-line="62" selection-end-column="26" />
           <folding>
-            <marker date="1426600545729" expanded="true" signature="573:726" placeholder="INSERT INTO ..." />
-            <marker date="1426600545729" expanded="true" signature="629:671" placeholder="SELECT pkUse..User..." />
-            <marker date="1426600545729" expanded="true" signature="674:721" placeholder="SELECT pkStu..Student..." />
-            <marker date="1426600545729" expanded="true" signature="1103:1175" placeholder="INSERT INTO ..." />
-            <marker date="1426600545729" expanded="true" signature="1549:1597" placeholder="INSERT INTO ..." />
-            <marker date="1426600545729" expanded="true" signature="2530:2744" placeholder="INSERT INTO ..." />
-            <marker date="1426600545729" expanded="true" signature="2622:2664" placeholder="SELECT pkUse..User..." />
-            <marker date="1426600545729" expanded="true" signature="2667:2715" placeholder="SELECT pkStu..Student..." />
-            <marker date="1426600545729" expanded="true" signature="3136:3199" placeholder="UPDATE Appoi..." />
-            <marker date="1426600545729" expanded="true" signature="3776:3811" placeholder="SELECT * FRO..missing_value..." />
-            <marker date="1426600545729" expanded="true" signature="4980:5261" placeholder="SELECT pkApp..." />
-            <marker date="1426600545729" expanded="true" signature="5900:6214" placeholder="SELECT pkApp..." />
+            <marker date="1426602376746" expanded="true" signature="573:726" placeholder="INSERT INTO ..." />
+            <marker date="1426602376746" expanded="true" signature="629:671" placeholder="SELECT pkUse..User..." />
+            <marker date="1426602376746" expanded="true" signature="674:721" placeholder="SELECT pkStu..Student..." />
+            <marker date="1426602376746" expanded="true" signature="1103:1175" placeholder="INSERT INTO ..." />
+            <marker date="1426602376746" expanded="true" signature="1549:1597" placeholder="INSERT INTO ..." />
+            <marker date="1426602376746" expanded="true" signature="2535:2749" placeholder="INSERT INTO ..." />
+            <marker date="1426602376746" expanded="true" signature="2627:2669" placeholder="SELECT pkUse..User..." />
+            <marker date="1426602376746" expanded="true" signature="2672:2720" placeholder="SELECT pkStu..Student..." />
+            <marker date="1426602376746" expanded="true" signature="3141:3204" placeholder="UPDATE Appoi..." />
+            <marker date="1426602376746" expanded="true" signature="3781:3816" placeholder="SELECT * FRO..missing_value..." />
+            <marker date="1426602376746" expanded="true" signature="4985:5266" placeholder="SELECT pkApp..." />
+            <marker date="1426602376746" expanded="true" signature="5905:6219" placeholder="SELECT pkApp..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/filter_with_query.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3135392" vertical-offset="0" max-vertical-offset="4440">
-          <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
-          <folding />
+        <state vertical-scroll-proportion="0.9622642" vertical-offset="696" max-vertical-offset="4776">
+          <caret line="63" column="22" selection-start-line="63" selection-start-column="22" selection-end-line="63" selection-end-column="22" />
+          <folding>
+            <element signature="e#26#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

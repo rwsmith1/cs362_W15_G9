@@ -49,7 +49,7 @@ class databaseEvent(Database):
         #data = appointment.getDate()
 
         if not self.getInfo(db, studentEmail, 1):
-            self._createStudent(studentName, studentEmail)
+            self._createStudent(db, studentName, studentEmail)
         if self.getInfo(db, userEmail):
             self.sql = "INSERT INTO Appointment (fkUser,fkStudent,timeStart, timeEnd, data, canceled, uId) VALUES ((SELECT pkUser FROM User WHERE email = '%s'),(SELECT pkStudent FROM Student WHERE email = '%s'),'%s', '%s', '%s','%d','%s')" % (email, studentEmail, timeStart, timeEnd, date, canceled, uId)
             db.update(self.sql)

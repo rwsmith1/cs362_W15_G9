@@ -36,6 +36,7 @@ class AppointmentBuilder():
         studentEmail = message.bodyParts[2].split('Email: ')[1]
 
         appt.setStudentEmail(studentEmail)
+        appt.setUserEmail(message.destAddr)
 
         startDateTime = datetime.datetime.strptime(startTimeStr + ' ' + dateString, '%I:%M%p %A %B %d %Y')
         endDateTime = datetime.datetime.strptime(endTimeStr + ' ' + dateString, '%I:%M%p %A %B %d %Y')

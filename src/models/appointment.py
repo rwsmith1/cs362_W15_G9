@@ -9,6 +9,7 @@ class Appointment(Base):
         self.canceled = 0
         self.user = user
         self.student = student
+        self.userEmail = None
         self.startDateTime = None
         self.endDateTime = None
         self.studentEmail = None
@@ -58,3 +59,10 @@ class Appointment(Base):
     def setStudentEmail(self, studentEmail):
         self.studentEmail = studentEmail
         return self.studentEmail
+
+    def getUserEmail(self):
+        return self.userEmail
+
+    def setUserEmail(self, userEmail):
+        self.userEmail = userEmail
+        return self.userEmail

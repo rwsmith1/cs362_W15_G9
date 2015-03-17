@@ -37,7 +37,7 @@ Please contact support@engr.oregonstate.edu if you experience problems
 fullMsg = """\
     From: do.not.reply@engr.orst.edu
 Sent: Thursday, November 15, 2012 10:11
-To: smithrog@engr.oregonstate.edu, smithrog@onid.oregonstate.edu
+To: smithrog@engr.oregonstate.edu; smithrog@onid.oregonstate.edu
 Subject: Advising Signup Cancellation
 Advising Signup with McGrath, D Kevin CANCELLED
 Name: REDACTED
@@ -51,7 +51,7 @@ Please contact support@engr.oregonstate.edu if you experience problems."""
 fullMsg = """\
     From: do.not.reply@engr.orst.edu
 Sent: Thursday, November 15, 2012 10:11
-To: smithrog@engr.oregonstate.edu, smithrog@onid.oregonstate.edu
+To: smithrog@engr.oregonstate.edu; smithrog@onid.oregonstate.edu
 Subject: Advising Signup Cancellation
 Advising Signup with McGrath, D Kevin CANCELLED
 Name: REDACTED
@@ -96,29 +96,29 @@ db.connect() #might not need
 #queries
 q = databaseEvent()
 
-# If the appointment email is a cancellation, get the original uid from the db so we can include it in
-# the cancelation iCalendar event. Also, mark event as cancelled in db.
-
 print "Check for cancelled."
 
 if appointment.getCanceled():
+
+    # If the appointment email is a cancellation, get the original uid from the db so we can include it in
+    # the cancelation iCalendar event. Also, mark event as cancelled in db.
+
     print "Request is a cancellation."
-    # array = getAppID(db, advisorName, studentName, INSERT_TIMESTART_HERE, INSERT_DATE_HERE)
 
-    print appointment.getUser()
-    print appointment.getStudent()
-    print appointment.getStartDateTime().strftime('%H:%M:%S')
-    print appointment.getStartDateTime().strftime('%Y-%m-%d')
+    # Get info re: existing appointment from db.
 
-    array = q.getAppID(db, appointment.getUser(), appointment.getStudent(), appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-%m-%d'))
+    array = q.getAppID(db, appointment)
 
-    studentVar = str(array[0])
-    uidVar = str(array[1])
-    timeVar = str(array[2])
-    dataVar = str(array[3])
+    #       0. Appointment Id
+    #       1. uId
+    #       2. timeStart
+    #       3. date
 
+    # Cancel appointment in DB
 
-    db.query("UPDATE Appointment SET canceled = 1 WHERE pkAppointment = %s" % (studentVar))
+    q.handleApp(array[0])
+
+   # Set calendar request attributes for cancellation.
 
     calendarRequest ="""\
 BEGIN:VCALENDAR
@@ -139,17 +139,15 @@ STATUS:CANCELLED
 TRANSP:OPAQUE
 END:VEVENT
 END:VCALENDAR
-""" % (timecreated, timecreated, timestart, timeend, timecreated, message.subject, uidVar, message.body)
+""" % (timecreated, timecreated, timestart, timeend, timecreated, message.subject, array[1], message.body)
 
 
-# If the request is not a cancellation, add it to the db.
 else:
+
+    q.addApp(db, appointment, uid)
+    # If the request is not a cancellation, add it to the db and send out new icalendar event.
+
     print "Message is an appointment request."
-    #insert
-    # db, userName, studentName, timeStart, date, location, uId, canceled=0
-    # q.addApp(db, advisorName, studentName, INSERT_TIME_START_HERE, INSERT_TIME_END_HERE, INSERT_DATE_HERE, uid)
-    q.addApp(db, appointment.getUser(), appointment.getStudent(), appointment.getStartDateTime().strftime('%H:%M:%S'), appointment.getEndDateTime().strftime('%H:%M:%S'), appointment.getStartDateTime().strftime('%Y-%m-%d'), uid, canceled=0)
-    # exit() # Testing
 
     calendarRequest ="""\
 BEGIN:VCALENDAR
@@ -175,11 +173,6 @@ END:VCALENDAR
 db.close()
 
 print "DB closed."
-
-#pass db object in the first field
-#return student name, time, date, uid
-
-##############################################
 
 # Assemble email and iCalendar object.
 

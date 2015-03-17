@@ -46,7 +46,7 @@ class databaseEvent(Database):
         studentEmail = appointment.getStartDateTime().strftime('%H:%M:%S')
         timeStart = appointment.getEndDateTime().strftime('%H:%M:%S')
         timeEnd = appointment.getStartDateTime().strftime('%Y-%m-%d')
-        data = appointment.getDate()
+        #data = appointment.getDate()
 
         if not self.getInfo(db, studentEmail, 1):
             self._createStudent(studentName, studentEmail)

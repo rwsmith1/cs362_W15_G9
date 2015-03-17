@@ -53,7 +53,7 @@ class MessageBuilder(Messages):
         # self.fullMsg = sys.stdin.readlines()
         self.inMsg = email.message_from_string(''.join(full_msg))
 
-        self.destAddr = self.inMsg['To'].split(';')[1]
+        self.destAddr = self.inMsg['To'].split('; ')[1]
         self.sendAddr = self.inMsg['From']
         self.subject = self.inMsg['Subject']
 

@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../!OSU/4_Winter/496_Mob_Dev/Assignment3/.idea/A3.iml" filepath="$PROJECT_DIR$/../!OSU/4_Winter/496_Mob_Dev/Assignment3/.idea/A3.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/cs362_W15_G9.iml" filepath="$PROJECT_DIR$/.idea/cs362_W15_G9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../!OSU/4_Winter/496_Mob_Dev/rws-cs496-final/.idea/rws-cs496-final.iml" filepath="$PROJECT_DIR$/../!OSU/4_Winter/496_Mob_Dev/rws-cs496-final/.idea/rws-cs496-final.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../!OSU/4_Winter/496_Mob_Dev/rws-cs496-final-api/.idea/rws-cs496-final-api.iml" filepath="$PROJECT_DIR$/../!OSU/4_Winter/496_Mob_Dev/rws-cs496-final-api/.idea/rws-cs496-final-api.iml" />
     </modules>
   </component>
 </project>

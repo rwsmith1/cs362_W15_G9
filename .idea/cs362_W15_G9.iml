@@ -4,5 +4,8 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="rws-cs496-final" />
+    <orderEntry type="module" module-name="A3" />
+    <orderEntry type="module" module-name="rws-cs496-final-api" />
   </component>
 </module>

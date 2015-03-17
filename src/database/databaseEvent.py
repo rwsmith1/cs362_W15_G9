@@ -49,7 +49,7 @@ class databaseEvent(Database):
         studentName = appointment.getStudent()
         studentEmail = appointment.getStudentEmail()
         timeStart = appointment.getEndDateTime().strftime('%H:%M:%S')
-        timeEnd = appointment.getEndDateTime().strftime('%H-%M-%S')
+        timeEnd = appointment.getEndDateTime().strftime('%H:%M:%S')
         date = appointment.getStartDateTime().strftime('%Y-%m-%d')
 
         if not self.getInfo(db, studentEmail, 1):
@@ -87,7 +87,10 @@ class databaseEvent(Database):
             info = 'User'
         else:
             info = 'Student'
-        self.sql = "SELECT * FROM %s WHERE email = '%s'" % (info, email)
+        self.sql = "SELECT * FROM `%s` WHERE email = '%s'" % (info, email)
+        #### Added for debugging
+        print self.sql
+        ####
         q = db.query(self.sql)
         return q 
 

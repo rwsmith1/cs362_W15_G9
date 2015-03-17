@@ -43,15 +43,14 @@ class databaseEvent(Database):
         userEmail = appointment.getUser()
         studentName = appointment.getStudent()
         studentEmail = appointment.getStudentEmail()
-        studentEmail = appointment.getStartDateTime().strftime('%H:%M:%S')
         timeStart = appointment.getEndDateTime().strftime('%H:%M:%S')
-        timeEnd = appointment.getStartDateTime().strftime('%Y-%m-%d')
-        #data = appointment.getDate()
+        timeEnd = appointment.getEndDateTime().strftime('%H-%M-%S')
+        date = appointment.getStartDateTime().strftime('%Y-%m-%d')
 
         if not self.getInfo(db, studentEmail, 1):
             self._createStudent(db, studentName, studentEmail)
         if self.getInfo(db, userEmail):
-            self.sql = "INSERT INTO Appointment (fkUser,fkStudent,timeStart, timeEnd, data, canceled, uId) VALUES ((SELECT pkUser FROM User WHERE email = '%s'),(SELECT pkStudent FROM Student WHERE email = '%s'),'%s', '%s', '%s','%d','%s')" % (email, studentEmail, timeStart, timeEnd, date, canceled, uId)
+            self.sql = "INSERT INTO Appointment (fkUser,fkStudent,timeStart, timeEnd, date, canceled, uId) VALUES ((SELECT pkUser FROM User WHERE email = '%s'),(SELECT pkStudent FROM Student WHERE email = '%s'),'%s', '%s', '%s','%d','%s')" % (userEmail, studentEmail, timeStart, timeEnd, date, canceled, uId)
             db.update(self.sql)
 
     ####################################################################
@@ -111,10 +110,9 @@ class databaseEvent(Database):
         q = db.query(self.sql)
 
         # Added for debugging ####
-        print userEmail
+        print q
         ####
 
-        print q
 
         return q
 

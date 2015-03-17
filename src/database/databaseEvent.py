@@ -99,8 +99,23 @@ class databaseEvent(Database):
         timeStart = appointment.getStartDateTime().strftime('%H:%M:%S')
         date = appointment.getStartDateTime().strftime('%Y-%m-%d')
 
+        # Added for debugging ####
+        print userEmail
+        print studentName
+        print timeStart
+        print date
+
+        ####
+
         self.sql = "SELECT pkAppointment, uId, timeStart, date FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.timeStart = %s AND Appointment.date = '%s' AND User.name = '%s'" % (studentName, timeStart, date, userEmail)
         q = db.query(self.sql)
+
+        # Added for debugging ####
+        print userEmail
+        ####
+
+        print q
+
         return q
 
 

@@ -44,7 +44,8 @@ class databaseEvent(Database):
     # Parameter: db = database object
     ####################################################################
     def addApp(self, db, appointment, uId, canceled=0):
-        userEmail = appointment.getUser()
+        user = appointment.getUser()
+        userEmail = appointment.getUserEmail()
         studentName = appointment.getStudent()
         studentEmail = appointment.getStudentEmail()
         timeStart = appointment.getEndDateTime().strftime('%H:%M:%S')

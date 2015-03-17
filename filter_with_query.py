@@ -19,7 +19,7 @@ from email.MIMEText import MIMEText
 # Read in message from the standard input.
 
 #fullMsg = sys.stdin.readlines()
-
+'''
 fullMsg = """\
 From: do.not.reply@engr.orst.edu
 Sent: Monday, November 26, 2012 19:15
@@ -32,8 +32,8 @@ Date: Wednesday, November 21st, 2012
 Time: 1:00pm - 1:15pm
 Please contact support@engr.oregonstate.edu if you experience problems
 """
-
 '''
+
 fullMsg = """\
     From: do.not.reply@engr.orst.edu
 Sent: Thursday, November 15, 2012 10:11
@@ -45,7 +45,7 @@ Email: REDACTED@engr.orst.edu
 Date: Wednesday, November 21st, 2012
 Time: 1:00pm - 1:15pm
 Please contact support@engr.oregonstate.edu if you experience problems."""
-'''
+
 '''
 fullMsg = """\
     From: do.not.reply@engr.orst.edu

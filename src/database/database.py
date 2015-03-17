@@ -26,6 +26,9 @@ class Database(object):
     def query(self, sql):
         # query the database
         try:
+            #### Added for debugging
+            print sql
+            ####
             self.cursor.execute(sql)
             self.results = self.cursor.fetchone()
             if self.results is not None:

@@ -115,7 +115,7 @@ if appointment.getCanceled():
 
     # Cancel appointment in DB
 
-    q.handleApp(array[0])
+    q.handleApp(db, array[0])
 
    # Set calendar request attributes for cancellation.
 

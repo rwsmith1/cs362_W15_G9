@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="38341fd2-16aa-4066-bc2e-b4b95f74bd52" name="Default" comment="Updates for filter functionality.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/database/databaseEvent.py" afterPath="$PROJECT_DIR$/src/database/databaseEvent.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/filter_with_query.py" afterPath="$PROJECT_DIR$/filter_with_query.py" />
+    <list default="true" id="38341fd2-16aa-4066-bc2e-b4b95f74bd52" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="cs362_W15_G9.iws" />
@@ -2896,7 +2894,13 @@
       <option name="project" value="LOCAL" />
       <updated>1426602286633</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Updates for filter functionality.">
+      <created>1426603707696</created>
+      <option name="number" value="00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1426603707696</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">

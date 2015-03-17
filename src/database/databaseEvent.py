@@ -108,12 +108,13 @@ class databaseEvent(Database):
     #     self.q = db.query(self.sql)
     #     return self.q
     def getAppID(self, db, appointment):
-        userEmail = appointment.getUser()
+        userEmail = appointment.getUserEmail()
         studentName = appointment.getStudent()
         timeStart = appointment.getStartDateTime().strftime('%H:%M:%S')
         date = appointment.getStartDateTime().strftime('%Y-%m-%d')
 
         # Added for debugging ####
+        print "In getAppID:"
         print userEmail
         print studentName
         print timeStart
@@ -121,10 +122,15 @@ class databaseEvent(Database):
 
         ####
 
-        self.sql = "SELECT pkAppointment, uId, timeStart, date FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.timeStart = %s AND Appointment.date = '%s' AND User.name = '%s'" % (studentName, timeStart, date, userEmail)
+        self.sql = "SELECT pkAppointment, uId, timeStart, date FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.timeStart = '%s' AND Appointment.date = '%s' AND User.email = '%s'" % (studentName, timeStart, date, userEmail)
+
+        #### Added for debugging ####
+        print self.sql
+        ####
         q = db.query(self.sql)
 
-        # Added for debugging ####
+
+        #### Added for debugging ####
         print q
         ####
 

@@ -1,3 +1,8 @@
+####################################################################
+    # Name: databaseEvent.py
+    # This program makes queries to the database. The purpose of each
+    # function is outline below.
+####################################################################
 __author__ = 'disatapp'
 
 import time
@@ -6,12 +11,7 @@ from database import Database
 from src.builders.appointmentBuilder import AppointmentBuilder
 
 class databaseEvent(Database):
-    #
-	# def __init__(self):
-	# 	Database.__init__(self)
-    #   self.q = None
-
-    ####################################################################      
+    ####################################################################
     # Insert new Message row to table
     # Parameter: db = database object
     ####################################################################
@@ -20,7 +20,7 @@ class databaseEvent(Database):
         db.update(self.sql)
 
     ####################################################################      
-    # Insert new Message row to table
+    # Insert new user row to table
     # Parameter: db = database object
     ####################################################################
     def _createUser(self, db, fName, lName, password, email):
@@ -28,15 +28,11 @@ class databaseEvent(Database):
         db.update(self.sql)
 
     ####################################################################      
-    # Insert new Message row to table
+    # Insert new Student row to table
     # Parameter: db = database object
     ####################################################################
     def _createStudent(self, db, studentName, studentEmail):
         self.sql = "INSERT INTO Student (name, email) VALUES ('%s','%s')" % (studentName, studentEmail)
-        #### Added for debugging
-        print "Attempting to add new student. Query:\n"
-        print self.sql
-        ####
         db.update(self.sql)
         
     ####################################################################
@@ -44,7 +40,7 @@ class databaseEvent(Database):
     # Parameter: db = database object
     ####################################################################
     def addApp(self, db, appointment, uId, canceled=0):
-        user = appointment.getUser()
+        #user = appointment.getUser()
         userEmail = appointment.getUserEmail()
         studentName = appointment.getStudent()
         studentEmail = appointment.getStudentEmail()
@@ -54,23 +50,17 @@ class databaseEvent(Database):
 
         if not self.getInfo(db, studentEmail, 1):
             self._createStudent(db, studentName, studentEmail)
-        #### Added for debugging
-        print userEmail
-        print self.getInfo(db, userEmail)
-        ####
+
         if self.getInfo(db, userEmail):
             self.sql = "INSERT INTO Appointment (fkUser,fkStudent,timeStart, timeEnd, date, canceled, uId) VALUES ((SELECT pkUser FROM User WHERE email = '%s'),(SELECT pkStudent FROM Student WHERE email = '%s'),'%s', '%s', '%s','%d','%s')" % (userEmail, studentEmail, timeStart, timeEnd, date, canceled, uId)
-            #### Added for debugging.
-            print self.sql
-            ####
             db.update(self.sql)
 
     ####################################################################
-    # Update Appintment table. 
+    # Update Appointment to cancelled.
     # Parameter: db = database object
     ####################################################################
-    def handleApp(self, db, appiontmentId, canceled=1):
-        self.sql = "UPDATE Appointment SET canceled = %d WHERE pkAppointment = '%d'" % (canceled, appiontmentId)
+    def handleApp(self, db, appointmentId, canceled=1):
+        self.sql = "UPDATE Appointment SET canceled = %d WHERE pkAppointment = '%d'" % (canceled, appointmentId)
         db.update(self.sql)
 
     ####################################################################
@@ -81,16 +71,11 @@ class databaseEvent(Database):
     #       1. email
     ####################################################################
     def getInfo(self, db, email, table=0):
-        # self.Database()
-        # self.connect()
         if table == 0:
             info = 'User'
         else:
             info = 'Student'
         self.sql = "SELECT * FROM `%s` WHERE email = '%s'" % (info, email)
-        #### Added for debugging
-        print self.sql
-        ####
         q = db.query(self.sql)
         return q 
 
@@ -103,38 +88,14 @@ class databaseEvent(Database):
     #       2. timeStart
     #       3. date
     ####################################################################
-    # def getAppID(self, db, userEmail, studentName, timeStart, date):
-    #     self.sql = "SELECT pkAppointment, uId, timeStart, date FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.timeStart = %s AND Appointment.date = '%s' AND User.name = '%s'" % (studentName, timeStart, date, userName)
-    #     self.q = db.query(self.sql)
-    #     return self.q
     def getAppID(self, db, appointment):
         userEmail = appointment.getUserEmail()
         studentName = appointment.getStudent()
         timeStart = appointment.getStartDateTime().strftime('%H:%M:%S')
         date = appointment.getStartDateTime().strftime('%Y-%m-%d')
-
-        # Added for debugging ####
-        print "In getAppID:"
-        print userEmail
-        print studentName
-        print timeStart
-        print date
-
-        ####
-
         self.sql = "SELECT pkAppointment, uId, timeStart, date FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.timeStart = '%s' AND Appointment.date = '%s' AND User.email = '%s'" % (studentName, timeStart, date, userEmail)
 
-        #### Added for debugging ####
-        print self.sql
-        ####
         q = db.query(self.sql)
-
-
-        #### Added for debugging ####
-        print q
-        ####
-
-
         return q
 
 
@@ -150,8 +111,8 @@ class databaseEvent(Database):
     #       5. email
     #       6. timeStart
     #       7. location
-    #       8. date, 
-    #       9. concanled
+    #       8. date
+    #       9. canceled
     #       10. uId
     ####################################################################
     def getApp(self, db, id):

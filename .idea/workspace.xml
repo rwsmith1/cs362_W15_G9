@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38341fd2-16aa-4066-bc2e-b4b95f74bd52" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/database/databaseEvent.py" afterPath="$PROJECT_DIR$/src/database/databaseEvent.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/view/view.py" afterPath="$PROJECT_DIR$/src/view/view.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/curse.py" afterPath="$PROJECT_DIR$/curse.py" />
     </list>
     <ignored path="cs362_W15_G9.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,10 +42,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="databaseEvent.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="databaseEvent.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/database/databaseEvent.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.07822086" vertical-offset="0" max-vertical-offset="2159">
+            <state vertical-scroll-proportion="-2.04" vertical-offset="0" max-vertical-offset="2159">
               <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
               <folding>
                 <element signature="e#295#306#0" expanded="true" />
@@ -68,13 +66,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/view/view.py">
+      <file leaf-file-name="curse.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/curse.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.68" vertical-offset="0" max-vertical-offset="4097">
-              <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.5112782" vertical-offset="0" max-vertical-offset="665">
+              <caret line="20" column="45" selection-start-line="20" selection-start-column="45" selection-end-line="20" selection-end-column="45" />
               <folding>
-                <element signature="e#492#502#0" expanded="true" />
+                <element signature="e#432#442#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -143,7 +141,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/models/message.py" />
         <option value="$PROJECT_DIR$/src/builders/__init__.py" />
         <option value="$PROJECT_DIR$/src/models/student.py" />
         <option value="$PROJECT_DIR$/src/builders/userBuilder.py" />
@@ -194,6 +191,7 @@
         <option value="$PROJECT_DIR$/filter_with_query.py" />
         <option value="$PROJECT_DIR$/src/view/view.py" />
         <option value="$PROJECT_DIR$/src/database/databaseEvent.py" />
+        <option value="$PROJECT_DIR$/curse.py" />
       </list>
     </option>
   </component>
@@ -3063,7 +3061,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/database/databaseEvent.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07822086" vertical-offset="0" max-vertical-offset="2159">
+        <state vertical-scroll-proportion="-2.04" vertical-offset="0" max-vertical-offset="2159">
           <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
           <folding>
             <element signature="e#295#306#0" expanded="true" />
@@ -3079,6 +3077,16 @@
             <marker date="1426727893643" expanded="true" signature="3924:3961" placeholder="SELECT * FRO..." />
             <marker date="1426727893643" expanded="true" signature="4653:4937" placeholder="SELECT pkApp..." />
             <marker date="1426727893643" expanded="true" signature="5575:5889" placeholder="SELECT pkApp..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/curse.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5112782" vertical-offset="0" max-vertical-offset="665">
+          <caret line="20" column="45" selection-start-line="20" selection-start-column="45" selection-end-line="20" selection-end-column="45" />
+          <folding>
+            <element signature="e#432#442#0" expanded="true" />
           </folding>
         </state>
       </provider>

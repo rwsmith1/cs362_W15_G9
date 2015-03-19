@@ -1,6 +1,11 @@
+####################################################################
+    # Name: user.py
+    # Tools to initialize/set User values or get already set values.
+####################################################################
 __author__ = 'kkozee'
 
 from src.models.base import Base
+
 
 class User(Base):
 
@@ -30,5 +35,3 @@ class User(Base):
 
     def getPassword(self):
         return self.password
-
-

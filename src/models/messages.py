@@ -1,3 +1,8 @@
+####################################################################
+    # Name: messages.py
+    # Initializes the parts of an email message to be used by other
+    # classes.
+####################################################################
 __author__ = 'kkozee'
 
 import sys

@@ -1,3 +1,8 @@
+####################################################################
+    # Name: appointment.py
+    # Tools to get and set elements of an appointment row in the
+    # database.
+####################################################################
 __author__ = 'kkozee'
 
 from src.models.base import Base

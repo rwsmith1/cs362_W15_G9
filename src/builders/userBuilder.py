@@ -1,6 +1,11 @@
+####################################################################
+    # Name: mailbox.py
+    # Initializes a User
+####################################################################
 __author__ = 'kkozee'
 
 from src.models.user import User
+
 
 class UserBuilder(User):
 

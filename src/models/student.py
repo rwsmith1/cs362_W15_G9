@@ -1,3 +1,7 @@
+####################################################################
+    # Name: student.py
+    # Initializes values for a Student
+####################################################################
 __author__ = 'kkozee'
 
 from src.models.user import User

@@ -181,9 +181,14 @@ class View(User):
         self.db.connect()
         dateStr = date.strftime('%A, %B %d, %Y')
         time = self.formatTime(startTime, endTime)
-
+        userName = name.split()
+        lastName = userName[len(userName)-1]
+        firstName = ""
+        for i in range(len(userName) - 1):
+            firstName = firstName + " " + userName[i]
+        sendName = lastName + "," + firstName
         fromAddr = 'do.not.reply@engr.orst.edu'
-        toAddr = email
+        toAddr = "harmonh@onid.oregonstate.edu"
         body = """\
         Advising Signup with %s CANCELLED
         Name: %s
@@ -191,11 +196,11 @@ class View(User):
         Date: %s
         Time: %s
         Please contact support@engr.oregonstate.edu if you experience problems.
-        """ % (name, student_name, student_email, dateStr, time)
+        """ % (sendName, student_name, student_email, dateStr, time)
 
         msg = MIMEText(body, 'plain')
 
-        msg['Subject'] = 'Advising Signup with %s CANCELLED.' % name
+        msg['Subject'] = 'Advising Signup Cancellation'
         msg['From'] = fromAddr
         msg['To'] = toAddr
 
@@ -205,32 +210,34 @@ class View(User):
 
     def formatTime(self, start, end):
         # formats datetime.timedelta to 12 hour time format/string
-        period = "am"
+        startPeriod = "am"
+        endPeriod = "am"
         startHour = start.seconds // 3600
         startMins = (start.seconds % 3600) // 60
-        if startHour > 12:
-            startHour = startHour - 12
-            period = "pm"
+        if startHour >= 12:
+            startPeriod = "pm"
+            if startHour > 12:
+                startHour = startHour - 12
         if startHour == 0:
             startHour = 12
-            period = "am"
+            startPeriod = "am"
         if startHour == 12:
-            period = "pm"
+            startPeriod = "pm"
         if startMins == 0:
             startMins = "00"
-        startStr = str(startHour) + ":" + str(startMins) + period
+        startStr = str(startHour) + ":" + str(startMins) + startPeriod
         endHour = end.seconds // 3600
         endMins = (end.seconds % 3600) // 60
-        if endHour > 12:
-            endHour = endHour - 12
-            period = "pm"
+        if endHour >= 12:
+            endPeriod = "pm"
+            if endHour > 12:
+                endHour = endHour - 12
         if endHour == 0:
             endHour = 12
-            period = "am"
-        if endHour == 12:
-            period = "pm"
+            endPeriod = "am"
+
         if endMins == 0:
             endMins = "00"
-        endStr = str(endHour) + ":" + str(endMins) + period
+        endStr = str(endHour) + ":" + str(endMins) + endPeriod
         time = startStr + "-" + endStr
         return time

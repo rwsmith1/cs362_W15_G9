@@ -1,3 +1,11 @@
+####################################################################
+    # Name: view.py
+    # This program authenticates users using the ncurses base CLI
+    # front-end and upon authentication runs an ncurses based user
+    # interface to view and interact with the user's appointment
+    # database. The user can view a list of their appointments or
+    # cancel a currently scheduled appointment.
+####################################################################
 __author__ = 'holly'
 
 import sys
@@ -54,8 +62,8 @@ class View(User):
             self.stdscr.addstr(4, 2, '2 - Cancel Appointment')
             self.stdscr.addstr(5, 2, '3 - Exit')
             self.stdscr.refresh()
-
             self.n = self.stdscr.getch()
+            # view scheduled appts
             if self.n == ord('1'):
                 self.stdscr.clear()
                 self.stdscr.addstr('Schedule View - *Press Any Key for Main Menu*')
@@ -68,9 +76,9 @@ class View(User):
                 for app in appts:
                     studentName = str(app[4])
                     studentEmail = str(app[5])
-                    startTime = str(app[6])
-                    endTime = str(app[7])
-                    time = startTime + "-" + endTime
+                    startTime = app[6]
+                    endTime = app[7]
+                    time = self.formatTime(startTime, endTime)
                     status = str(app[10])
                     date = str(app[9])
                     if status == "0":
@@ -79,8 +87,11 @@ class View(User):
                         self.stdscr.addstr(row, 30, studentName)
                         self.stdscr.addstr(row, 50, studentEmail)
                         row += 1
+                if row == 3:
+                    self.stdscr.addstr(3, 0, 'You currently have no appointments scheduled.')
                 self.stdscr.refresh()
                 self.stdscr.getkey()
+            # cancel a scheduled appointment
             if self.n == ord('2'):
                 curses.curs_set(True)
                 self.stdscr.clear()
@@ -90,7 +101,6 @@ class View(User):
                 self.stdscr.addstr(4, 0, 'Appt ID')
                 self.stdscr.addstr(4, 10, 'DATE')
                 self.stdscr.addstr(4, 25, 'TIME')
-                #self.stdscr.addstr(4, 45, 'STATUS')
                 self.stdscr.addstr(4, 45, 'STUDENT')
                 appts2 = q.getApp(self.db, self.userId)
                 row = 5
@@ -99,31 +109,28 @@ class View(User):
                     appIds.append(str(app2[0]))
                     appId = str(app2[0])
                     studentName = str(app2[4])
-                    startTime = str(app2[6])
-                    endTime = str(app2[7])
-                    time = startTime + "-" + endTime
+                    startTime = app2[6]
+                    endTime = app2[7]
+                    time = self.formatTime(startTime, endTime)
                     date = str(app2[9])
                     status = str(app2[10])
-                    #if status == "1":
-                    #    status = "Canceled"
-                    #else:
-                    #    status = "Active"
                     if status == "0":
                         self.stdscr.addstr(row, 1, appId)
                         self.stdscr.addstr(row, 10, date)
                         self.stdscr.addstr(row, 25, time)
-                        #self.stdscr.addstr(row, 45, status)
                         self.stdscr.addstr(row, 45, studentName)
                         row += 1
-
+                # input verification
                 self.stdscr.move(2, 3)
                 self.m = self.stdscr.getstr()
                 while self.m not in appIds and self.m != "exit":
+                    self.stdscr.addstr(3, 0, 'Not A Valid Appointment ID. Try Again.', curses.A_BOLD)
                     self.stdscr.move(2, 3)
                     self.stdscr.clrtoeol()
+
                     self.m = self.stdscr.getstr()
                 self.stdscr.addstr(6, 5, "good id")
-
+                # verify appointment cancellation
                 if self.m != "exit":
                     curses.curs_set(False)
                     for app2 in appts2:
@@ -136,11 +143,11 @@ class View(User):
                             self.stdscr.addstr(2, 45, 'STUDENT')
                             appId = str(app2[0])
                             studentName = str(app2[4])
-                            startTime = str(app2[6])
+                            startTime = app2[6]
                             eStart = app2[6]
-                            endTime = str(app2[7])
+                            endTime = app2[7]
                             eEnd = app2[7]
-                            time = startTime + "-" + endTime
+                            time = self.formatTime(startTime, endTime)
                             date = str(app2[9])
                             eDate = app2[9]
                             studentEmail = str(app2[5])
@@ -150,16 +157,14 @@ class View(User):
                             self.stdscr.addstr(3, 45, studentName)
                             self.c = self.stdscr.getch()
                             if self.c == ord('y'):
-                                sql = q.handleApp(self.db, app2[0])
+                                q.handleApp(self.db, app2[0])
                                 self.sendCancellation(self.userName, self.email, studentName, studentEmail, eDate, eStart, eEnd)
                                 self.stdscr.clear()
                                 self.stdscr.addstr('Cancelled! - *Press any key for main menu*')
-                                #self.stdscr.refresh()
                                 self.stdscr.getkey()
                             else:
                                 self.stdscr.clear()
                                 self.stdscr.addstr('Not cancelled - *Press any key for main menu*')
-                                #self.stdscr.refresh()
                                 self.stdscr.getkey()
                 else:
                     self.initView()
@@ -171,27 +176,14 @@ class View(User):
         wrapper(self.initView())
 
     def sendCancellation(self, name, email, student_name, student_email, date, startTime, endTime):
+        # sends a cancellation email when an appointment is cancelled
         self.db = Database()
         self.db.connect()
         dateStr = date.strftime('%A, %B %d, %Y')
-        period = "am"
-        startHour = startTime.seconds // 3600
-        startMins = (startTime.seconds % 3600) // 60
-        if startHour > 12:
-            startHour = startHour - 12
-            period = "pm"
-        startStr = str(startHour) + ":" + str(startMins) + period
-        endHour = endTime.seconds // 3600
-        endMins = (endTime.seconds % 3600) // 60
-        if endHour > 12:
-            endHour = startHour - 12
-            period = "pm"
-        endStr = str(endHour) + ":" + str(endMins) + period
-        time = startStr + "-" + endStr
+        time = self.formatTime(startTime, endTime)
 
         fromAddr = 'do.not.reply@engr.orst.edu'
         toAddr = email
-        #toAddr = 'harmonh@onid.oregonstate.edu'
         body = """\
         Advising Signup with %s CANCELLED
         Name: %s
@@ -210,3 +202,35 @@ class View(User):
         s = smtplib.SMTP('mail.engr.oregonstate.edu')
         s.sendmail(fromAddr, toAddr, msg.as_string())
         s.quit()
+
+    def formatTime(self, start, end):
+        # formats datetime.timedelta to 12 hour time format/string
+        period = "am"
+        startHour = start.seconds // 3600
+        startMins = (start.seconds % 3600) // 60
+        if startHour > 12:
+            startHour = startHour - 12
+            period = "pm"
+        if startHour == 0:
+            startHour = 12
+            period = "am"
+        if startHour == 12:
+            period = "pm"
+        if startMins == 0:
+            startMins = "00"
+        startStr = str(startHour) + ":" + str(startMins) + period
+        endHour = end.seconds // 3600
+        endMins = (end.seconds % 3600) // 60
+        if endHour > 12:
+            endHour = endHour - 12
+            period = "pm"
+        if endHour == 0:
+            endHour = 12
+            period = "am"
+        if endHour == 12:
+            period = "pm"
+        if endMins == 0:
+            endMins = "00"
+        endStr = str(endHour) + ":" + str(endMins) + period
+        time = startStr + "-" + endStr
+        return time

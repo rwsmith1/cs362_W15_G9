@@ -16,7 +16,9 @@ class databaseEvent(Database):
     # Parameter: db = database object
     ####################################################################
     def _createMessage(self, db, userEmail, studentName, Message):
-        self.sql = "INSERT INTO Message (fkUser,fkStudent,mailbox) VALUES ((SELECT pkUser FROM User WHERE email = '%s'),(SELECT pkStudent FROM Student WHERE name = '%s'),%s)" % (userEmail, studentName, Message)
+        self.sql = "INSERT INTO Message (fkUser,fkStudent,mailbox) " \
+                   "VALUES ((SELECT pkUser FROM User WHERE email = '%s'),(SELECT pkStudent FROM Student " \
+                   "WHERE name = '%s'),%s)" % (userEmail, studentName, Message)
         db.update(self.sql)
 
     ####################################################################      
@@ -24,7 +26,8 @@ class databaseEvent(Database):
     # Parameter: db = database object
     ####################################################################
     def _createUser(self, db, fName, lName, password, email):
-        self.sql = "INSERT INTO User (fname, lname, password, email) VALUES (%s,%s,%s,%s,%s)" % (fName, lName, password, email)
+        self.sql = "INSERT INTO User (fname, lname, password, email) " \
+                   "VALUES (%s,%s,%s,%s,%s)" % (fName, lName, password, email)
         db.update(self.sql)
 
     ####################################################################      
@@ -52,7 +55,10 @@ class databaseEvent(Database):
             self._createStudent(db, studentName, studentEmail)
 
         if self.getInfo(db, userEmail):
-            self.sql = "INSERT INTO Appointment (fkUser,fkStudent,timeStart, timeEnd, date, canceled, uId) VALUES ((SELECT pkUser FROM User WHERE email = '%s'),(SELECT pkStudent FROM Student WHERE email = '%s'),'%s', '%s', '%s','%d','%s')" % (userEmail, studentEmail, timeStart, timeEnd, date, canceled, uId)
+            self.sql = "INSERT INTO Appointment (fkUser,fkStudent,timeStart, timeEnd, date, canceled, uId) " \
+                       "VALUES ((SELECT pkUser FROM User WHERE email = '%s')," \
+                       "(SELECT pkStudent FROM Student WHERE email = '%s'),'%s', '%s', '%s','%d','%s')" % \
+                       (userEmail, studentEmail, timeStart, timeEnd, date, canceled, uId)
             db.update(self.sql)
 
     ####################################################################
@@ -93,7 +99,11 @@ class databaseEvent(Database):
         studentName = appointment.getStudent()
         timeStart = appointment.getStartDateTime().strftime('%H:%M:%S')
         date = appointment.getStartDateTime().strftime('%Y-%m-%d')
-        self.sql = "SELECT pkAppointment, uId, timeStart, date FROM Appointment INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent INNER JOIN User ON Appointment.fkUser = User.pkUser WHERE Student.name = '%s' AND Appointment.timeStart = '%s' AND Appointment.date = '%s' AND User.email = '%s'" % (studentName, timeStart, date, userEmail)
+        self.sql = "SELECT pkAppointment, uId, timeStart, date FROM Appointment " \
+                   "INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent " \
+                   "INNER JOIN User ON Appointment.fkUser = User.pkUser " \
+                   "WHERE Student.name = '%s' AND Appointment.timeStart = '%s' AND Appointment.date = '%s' " \
+                   "AND User.email = '%s'" % (studentName, timeStart, date, userEmail)
 
         q = db.query(self.sql)
         return q
@@ -116,6 +126,10 @@ class databaseEvent(Database):
     #       10. uId
     ####################################################################
     def getApp(self, db, id):
-        self.sql = "SELECT pkAppointment, fkUser, User.name, fkStudent, Student.name, Student.email, timeStart, timeEnd, location, date, canceled, uId FROM User INNER JOIN Appointment ON User.pkUser = Appointment.fkUser INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent WHERE User.pkUser = '%s' ORDER BY Appointment.date" % (id)
+        self.sql = "SELECT pkAppointment, fkUser, User.name, fkStudent, Student.name, Student.email, " \
+                   "timeStart, timeEnd, location, date, canceled, uId FROM User " \
+                   "INNER JOIN Appointment ON User.pkUser = Appointment.fkUser " \
+                   "INNER JOIN Student ON Appointment.fkStudent = Student.pkStudent " \
+                   "WHERE User.pkUser = '%s' ORDER BY Appointment.date" % (id)
         self.q = db.queryall(self.sql)
         return self.q 

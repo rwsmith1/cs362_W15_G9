@@ -185,7 +185,7 @@ class View(User):
         elif day == "02" or day == "22":
             dateStr = date.strftime('%A, %B %dnd, %Y')
         elif day == "03" or day == "23":
-            date.strftime('%A, %B %drd, %Y')
+            dateStr = date.strftime('%A, %B %drd, %Y')
         else:
             dateStr = date.strftime('%A, %B %dth, %Y')
         time = self.formatTime(startTime, endTime)

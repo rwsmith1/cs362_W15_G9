@@ -179,7 +179,15 @@ class View(User):
         # sends a cancellation email when an appointment is cancelled
         self.db = Database()
         self.db.connect()
-        dateStr = date.strftime('%A, %B %d, %Y')
+        day = date.strftime('%d')
+        if day == "01" or day == "21" or day == "31":
+            dateStr = date.strftime('%A, %B %dst, %Y')
+        elif day == "02" or day == "22":
+            dateStr = date.strftime('%A, %B %dnd, %Y')
+        elif day == "03" or day == "23":
+            date.strftime('%A, %B %drd, %Y')
+        else:
+            dateStr = date.strftime('%A, %B %dth, %Y')
         time = self.formatTime(startTime, endTime)
         userName = name.split()
         lastName = userName[len(userName)-1]
@@ -239,5 +247,5 @@ class View(User):
         if endMins == 0:
             endMins = "00"
         endStr = str(endHour) + ":" + str(endMins) + endPeriod
-        time = startStr + "-" + endStr
+        time = startStr + " - " + endStr
         return time

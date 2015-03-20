@@ -188,7 +188,7 @@ class View(User):
             firstName = firstName + " " + userName[i]
         sendName = lastName + "," + firstName
         fromAddr = 'do.not.reply@engr.orst.edu'
-        toAddr = student_email + "; " + email
+        toAddr = [student_email, email]
         body = """\
         Advising Signup with %s CANCELLED
         Name: %s
@@ -202,7 +202,7 @@ class View(User):
 
         msg['Subject'] = 'Advising Signup Cancellation'
         msg['From'] = fromAddr
-        msg['To'] = toAddr
+        msg['To'] = student_email + "; " + email
 
         s = smtplib.SMTP('mail.engr.oregonstate.edu')
         s.sendmail(fromAddr, toAddr, msg.as_string())

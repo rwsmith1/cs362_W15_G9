@@ -1,4 +1,14 @@
 #!/usr/bin/python
+####################################################################
+    # Name: filter.py
+    # Parameter: useremail password
+    # This program reads an email message from the standard input and
+    # from that builds a message (either for a new appointment or
+    # a cancelled appointment) and an iCalendar appointment to be
+    # sent to the Advisor. If it's a new appointment it is added to
+    # the database, if it's a canceled appointment it is set to 
+    # "canceled" in the database.
+####################################################################
 __author__ = 'rwsmi_000'
 
 import sys, os

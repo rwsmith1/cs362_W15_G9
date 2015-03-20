@@ -58,7 +58,7 @@ class MessageBuilder(Messages):
         # Parse message string
         self.inMsg = email.message_from_string(''.join(full_msg))
 
-        self.destAddr = self.inMsg['To'].split('; ')[1]
+        self.destAddr = self.inMsg['To'].split(';')[1]
         self.sendAddr = self.inMsg['From']
         self.subject = self.inMsg['Subject']
 

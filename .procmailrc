@@ -2,4 +2,4 @@
 
 :0:
 *^Subject.*Advising Signup
-|/usr/bin/python filter.py
+|/usr/bin/python ~/cs419_W15_G9/filter.py

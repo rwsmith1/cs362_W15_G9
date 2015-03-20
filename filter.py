@@ -1,4 +1,8 @@
+#!/usr/bin/python
 __author__ = 'rwsmi_000'
+
+import sys, os
+sys.path.append(os.getcwd())
 
 import datetime
 import email

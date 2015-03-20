@@ -188,7 +188,7 @@ class View(User):
             firstName = firstName + " " + userName[i]
         sendName = lastName + "," + firstName
         fromAddr = 'do.not.reply@engr.orst.edu'
-        toAddr = email
+        toAddr = student_email + "; " + email
         body = """\
         Advising Signup with %s CANCELLED
         Name: %s
